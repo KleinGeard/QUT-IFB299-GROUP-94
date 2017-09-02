@@ -4,12 +4,23 @@ from django.http import HttpResponse
 # Create your views here.
 def index(request):
     page_title = 'Smart City - Welcome Page'
+    location = 'Australia'
+    
+    if (request.GET.get('btnBrisbane')):
+        location = 'Brisbane'
+    elif (request.GET.get('btnSydney')):
+        location = 'Sydney'
+    elif (request.GET.get('btnPerth')):
+        location = 'Perth'
+    elif (request.GET.get('btnHobart')):
+        location = 'Hobart'
+
 
     return render(request, "smart_city_app/index.html",
     {
         # Pass variables into template
         "page_title": page_title,
-        "city": 'Brisbane' # temporarily hardcoded
+        "location": location
     })
 
 def about(request):

@@ -22,8 +22,46 @@
 
         <content>
             <p>
-                Welcome to Smart City, your guide to {{ city }}! Below is a map tool which you can use to find places in the city!
+                Welcome to Smart City: your guide to {{ location }}! Below is a map tool which you can use to find places in the city in which you're interested!
             </p>
+
+            <!-- Temporary. Cities should be loaded from database to allow 
+                 functionality to add new cities to the system -->
+            <form method='get'>
+                <input type="submit" value="Brisbane" name="btnBrisbane"/>
+                <input type="submit" value="Sydney" name="btnSydney"/>
+                <input type="submit" value="Perth" name="btnPerth"/>
+                <input type="submit" value="Hobart" name="btnHobart"/>
+            </form>
+            
+            <hr>
+
+            <div class="map" style="">
+
+                {% if location == "Brisbane" %}
+
+                    <h1>Temporary map of {{location}} (from Google). Insert our own map here:</h1>
+                    <img src="{% static 'brisbane-map.PNG' %}" />
+                {% elif location == "Sydney" %}
+
+                    <h1>Temporary map of {{location}}. Insert map here:</h1>
+                    <img src="{% static 'sydney-map.PNG' %}" />
+
+                {% elif location == "Perth" %}
+
+                    <h1>Temporary map of {{location}}. Insert map here:</h1>
+                    <img src="{% static 'perth-map.PNG' %}" />
+
+                {% elif location == "Hobart" %}
+
+                    <h1>Temporary map of {{location}}. Insert map here:</h1>
+                    <img src="{% static 'hobart-map.PNG' %}" />
+                {% else %}
+                    <h1>Please select a city or login to continue.</h1>
+                {% endif %}
+
+            </div>
+
         </content>
     </body>
 </html>
