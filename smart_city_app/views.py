@@ -1,20 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-# Create your views here.
+# Welcome/home page view
 def index(request):
     page_title = 'Smart City - Welcome Page'
-    location = 'Australia'
     
-    if (request.GET.get('btnBrisbane')):
-        location = 'Brisbane'
-    elif (request.GET.get('btnSydney')):
-        location = 'Sydney'
-    elif (request.GET.get('btnPerth')):
-        location = 'Perth'
-    elif (request.GET.get('btnHobart')):
-        location = 'Hobart'
+    # Get the selected location
+    location = request.GET.get('city')
 
+    # If none of the valid cities, set to Australia
+    if (location != 'Brisbane' and location != 'Sydney' and location != 'Perth' and location != 'Hobart'):
+        location = 'Australia'
 
     return render(request, "smart_city_app/index.html",
     {
@@ -42,7 +38,7 @@ def contact(request):
         "page_title": page_title
         
     })
-
+    
 def login(request):
     page_title = 'Smart City - Login'
 
