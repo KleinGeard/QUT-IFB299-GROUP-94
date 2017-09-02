@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title> {{ page_title }} </title>
+
+        <!-- STATIC FILES -->
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen">
+        
+        <script src="{% static 'js/scripts.js' %}"></script>
+        <!-- END STATIC FILES -->
+    </head>
+    <body>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about" class="active">About</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+            <li style="float:right"><a href="/login">Login</a></li>
+            <li style="float:right"><a href="/register">Register</a></li>
+        </ul>
+    </body>
+</html>
