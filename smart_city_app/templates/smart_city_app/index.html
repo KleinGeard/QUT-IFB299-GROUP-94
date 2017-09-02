@@ -6,7 +6,7 @@
 
         <!-- STATIC FILES -->
         <link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen">
-
+        <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
         <script src="{% static 'js/scripts.js' %}"></script>
         <!-- END STATIC FILES -->
     </head>
@@ -21,7 +21,7 @@
 
         <content>
             <p>
-                Welcome to Smart City, your guide to Brisbane! Below is a map tool which you can use to find places in the city!
+                Welcome to Smart City, your guide to {{ city }}! Below is a map tool which you can use to find places in the city!
             </p>
         </content>
     </body>

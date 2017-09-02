@@ -8,8 +8,8 @@ def index(request):
     return render(request, "smart_city_app/index.html",
     {
         # Pass variables into template
-        "page_title": page_title
-        
+        "page_title": page_title,
+        "city": 'Brisbane' # temporarily hardcoded
     })
 
 def about(request):
