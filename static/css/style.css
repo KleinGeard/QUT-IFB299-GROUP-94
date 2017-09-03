@@ -25,6 +25,23 @@ h1 {
     color: white;
 }
 
+.tile_medium {
+    background-color: #333;
+    color: white;
+    height: 60px;
+    width: 100%;
+    border-style: none;
+    font-family: "Comic Sans MS", sans-serif;
+    font-size: 20px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.tile_medium:hover {
+    background-color: #111;
+    color: white;
+}
+
 /* some snippets from https://www.w3schools.com/css/css_navbar.asp */
 ul {
     list-style-type: none;
@@ -54,3 +71,8 @@ li a.active {
     background-color: #22aa22;
 }
 
+/* List of search results */
+.list {
+    float: right;
+    width: 200;
+}
