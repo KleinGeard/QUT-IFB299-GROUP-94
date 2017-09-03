@@ -1,5 +1,5 @@
 body {
-    font-family: "Comic Sans MS", sans-serif;
+    font-family: sans-serif;
 }
 
 h1 {
@@ -16,7 +16,7 @@ h1 {
     color: white;
     height: 35px;
     border-style: none;
-    font-family: "Comic Sans MS", sans-serif;
+    font-family: sans-serif;
     font-size: 18px;
 }
 
@@ -31,7 +31,7 @@ h1 {
     height: 60px;
     width: 98%;
     border-style: none;
-    font-family: "Comic Sans MS", sans-serif;
+    font-family: sans-serif;
     font-size: 20px;
     display: block;
     margin-bottom: 5px;
