@@ -1,24 +1,35 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from smart_city_app.models import map_item
 
 # Welcome/home page view
 def index(request):
     page_title = 'Smart City - Welcome Page'
-    
+
+    # initialize set of results
+    results = []
+    # if no search has occurred (this is the purpose of -1), don't display any text, if 0, 
+    # display "No results found", else it'll display "Results for..."
+    result_count = -1
+
     location = request.GET.get('city') # Stored as a url parameter so users can bookmark the url with a specific city
     q = request.POST.get('query') # Retrieve map search query from text field
+
+    
 
     # Only update the session variable if it's not empty
     if (q != None and q != ''):
         request.session['query'] = q
-
+        
+        results = map_item.objects.raw("SELECT * FROM smart_city_app_map_item WHERE map_item_name LIKE '%{}%'".format(q))
+        result_count = len(list(results))
+    
     # If none of the valid cities, set to Australia
     if (location != 'Brisbane' and location != 'Sydney' and location != 'Perth' and location != 'Hobart'):
         location = 'Australia' # I know it's not a city btw
 
     # TODO: get results from database and compare with query, then construct list
-    results = {'Queensland University of Technology','University of Queensland', 'Test location', 'A museum somewhere', 'Cinema'}
-
+    
     # Construct the markup based on the template, and variables
     return render(request, "smart_city_app/index.html",
     {
@@ -27,6 +38,7 @@ def index(request):
         "location": location,
         "query": request.session['query'],
         "results": results,
+        "len":result_count,
     })
 
 def about(request):
