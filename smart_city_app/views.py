@@ -32,8 +32,6 @@ def index(request):
     if (location != 'Brisbane' and location != 'Sydney' and location != 'Perth' and location != 'Hobart'):
         location = 'Australia' # I know it's not a city btw
 
-    # TODO: get results from database and compare with query, then construct list
-    
     # Construct the markup based on the template, and variables
     return render(request, "smart_city_app/index.html",
     {
