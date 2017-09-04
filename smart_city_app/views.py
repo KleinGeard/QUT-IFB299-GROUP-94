@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from smart_city_app.models import map_item
+from smart_city_app.queries import map_search
 
 # Welcome/home page view
 def index(request):
@@ -15,13 +16,16 @@ def index(request):
     location = request.GET.get('city') # Stored as a url parameter so users can bookmark the url with a specific city
     q = request.POST.get('query') # Retrieve map search query from text field
 
-    
+    # Construct the map file name
+    map_image = ''
+    if (location != None):
+        map_image = location.lower() + '-map.PNG'
 
     # Only update the session variable if it's not empty
     if (q != None and q != ''):
         request.session['query'] = q
         
-        results = map_item.objects.raw("SELECT * FROM smart_city_app_map_item WHERE map_item_name LIKE '%{}%'".format(q))
+        results = map_item.objects.raw(map_search.format(q))
         result_count = len(list(results))
     
     # If none of the valid cities, set to Australia
@@ -36,6 +40,7 @@ def index(request):
         # Pass variables into template
         "page_title": page_title,
         "location": location,
+        "map": map_image,
         "query": request.session['query'],
         "results": results,
         "len":result_count,

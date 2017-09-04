@@ -45,58 +45,19 @@
             <br>
 
             <div class="map">
-                {% if location == "Brisbane" %}
+                <!-- If it's a valid city -->
+                {% if location == "Brisbane" or location == "Sydney" or location == "Perth" or location == "Hobart" %}
 
                     <!-- Change button to green -->
-                    <script>document.getElementById("btnBrisbane").style.background='#22aa22';</script>
-
-                    <h1>Temporary map of {{location}}. Insert our own map here:</h1>
-
-                    <!-- Tiles -->
-                    <div class="list">
-                        {% if len > 0  %}<h2>Results for "{{query}}":</h2>{% elif len == -1 %} {% else %}<h2>No results found.</h2>{% endif %}
-
-                        <form method="GET"> <!-- Temporary hardcoding of results -->
-                            
-                            {% for result in results %}
-                                <input id="btnRes{{forloop.counter0}}" class="tile_medium" type="submit" value="{{result.map_item_name}}" name="result"/>
-                            {% endfor%}
-                            
-                        </form>
-                    </div>
-                    <img src="{% static 'brisbane-map.PNG' %}" />
-                    
-                {% elif location == "Sydney" %}
-                    
-                    <!-- Change button to green -->
-                    <script>document.getElementById("btnSydney").style.background='#22aa22';</script>
-
-                    <h1>Temporary map of {{location}}. Insert map here:</h1>
-                    
-                    <!-- Tiles -->
-                    <div class="list">
-                        {% if len > 0  %}<h2>Results for "{{query}}":</h2>{% elif len == -1 %} {% else %}<h2>No results found.</h2>{% endif %}
-                        <form method="GET"> <!-- Temporary hardcoding of results -->
-                            
-                            {% for result in results %}
-                                <input id="btnRes{{forloop.counter0}}" class="tile_medium" type="submit" value="{{result.map_item_name}}" name="result"/>
-                            {% endfor%}
-                            
-                        </form>
-                    </div>
-                    <img src="{% static 'sydney-map.PNG' %}" />
-
-                {% elif location == "Perth" %}
-                
-                    <!-- Change button to green -->
-                    <script>document.getElementById("btnPerth").style.background='#22aa22';</script>
+                    <script>document.getElementById("btn{{location}}").style.background='#22aa22';</script>
 
                     <h1>Temporary map of {{location}}. Insert map here:</h1>
 
                     <!-- Tiles -->
                     <div class="list">
                         {% if len > 0  %}<h2>Results for "{{query}}":</h2>{% elif len == -1 %} {% else %}<h2>No results found.</h2>{% endif %}
-                        <form method="GET"> <!-- Temporary hardcoding of results -->
+
+                        <form method="GET">
                             
                             {% for result in results %}
                                 <input id="btnRes{{forloop.counter0}}" class="tile_medium" type="submit" value="{{result.map_item_name}}" name="result"/>
@@ -104,27 +65,7 @@
                             
                         </form>
                     </div>
-                    <img src="{% static 'perth-map.PNG' %}" />
-
-                {% elif location == "Hobart" %}
-
-                    <!-- Change button to green -->
-                    <script>document.getElementById("btnHobart").style.background='#22aa22';</script>
-
-                    <h1>Temporary map of {{location}}. Insert map here:</h1>
-                    
-                    <!-- Tiles -->
-                    <div class="list">
-                        {% if len > 0  %}<h2>Results for "{{query}}":</h2>{% elif len == -1 %} {% else %}<h2>No results found.</h2>{% endif %}
-                        <form method="GET"> <!-- Temporary hardcoding of results -->
-                            
-                            {% for result in results %}
-                                <input id="btnRes{{forloop.counter0}}" class="tile_medium" type="submit" value="{{result.map_item_name}}" name="result"/>
-                            {% endfor%}
-                            
-                        </form>
-                    </div>
-                    <img src="{% static 'hobart-map.PNG' %}" />
+                    <img src="{% static map %}" />
 
                 {% else %}
 

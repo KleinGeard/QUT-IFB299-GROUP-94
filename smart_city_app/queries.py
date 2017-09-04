@@ -1,0 +1,1 @@
+map_search = "SELECT * FROM smart_city_app_map_item WHERE map_item_name LIKE '%{}%'"
