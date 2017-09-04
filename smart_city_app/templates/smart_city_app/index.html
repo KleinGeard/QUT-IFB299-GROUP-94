@@ -17,6 +17,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact Us</a></li>
             <li style="float:right"><a href="/login">Login</a></li>
+            <li style="float:right"><a href="/logout">Logout</a></li>
             <li style="float:right"><a href="/register">Register</a></li>
         </ul>
 
@@ -51,11 +52,12 @@
                     <!-- Change button to green -->
                     <script>document.getElementById("btn{{location}}").style.background='#22aa22';</script>
 
-                    <h1>Temporary map of {{location}}. Insert map here:</h1>
+                    <p>Temporary map of {{location}}. Insert map here:</p>
 
+                    <img id="map_img" src="{% static map %}" />
                     <!-- Tiles -->
                     <div class="list">
-                        {% if len > 0  %}<h2>Results for "{{query}}":</h2>{% elif len == -1 %} {% else %}<h2>No results found.</h2>{% endif %}
+                        {% if len > 0  %}<p>Found {{len}} place(s):</p>{% elif len == -1 %} {% else %}<p>No results found.</p>{% endif %}
 
                         <form method="GET">
                             
@@ -65,7 +67,6 @@
                             
                         </form>
                     </div>
-                    <img src="{% static map %}" />
 
                 {% else %}
 

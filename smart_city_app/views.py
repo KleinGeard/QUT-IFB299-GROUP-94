@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from smart_city_app.models import map_item
-from smart_city_app.queries import map_search
+from smart_city_app.queries import map_search, map_search_no_city
 
 # Welcome/home page view
 def index(request):
@@ -25,7 +25,7 @@ def index(request):
     if (q != None and q != ''):
         request.session['query'] = q
         
-        results = map_item.objects.raw(map_search.format(q))
+        results = map_item.objects.raw(map_search.format(q,location))
         result_count = len(list(results))
     
     # If none of the valid cities, set to Australia
@@ -39,7 +39,6 @@ def index(request):
         "page_title": page_title,
         "location": location,
         "map": map_image,
-        "query": request.session['query'],
         "results": results,
         "len":result_count,
     })
