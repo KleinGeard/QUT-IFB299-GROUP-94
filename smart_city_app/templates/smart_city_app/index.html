@@ -62,7 +62,7 @@
                         <form method="GET">
                             
                             {% for result in results %}
-                                <input id="btnRes{{forloop.counter0}}" class="tile_medium" type="submit" value="{{result.map_item_name}}" name="result"/>
+                                <input id="btnRes{{forloop.counter0}}" class="tile_medium" type="button" value="{{result.map_item_name}}" name="result"/>
                             {% endfor%}
                             
                         </form>
