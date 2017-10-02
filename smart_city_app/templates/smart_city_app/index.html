@@ -16,8 +16,14 @@
             <li><a href="/" class="active">Home</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact Us</a></li>
-            <li style="float:right"><a href="/login">Login</a></li>
-            <li style="float:right"><a href="/logout">Logout</a></li>
+            {% if user.is_authenticated %}
+                <li style="float:right"><a href="/logout">Logout</a></li>
+                {% if group_id == 1 %}
+                    <li><a href="/editor">Edit places</a></li>
+                {% endif %}
+            {% else %}
+                <li style="float:right"><a href="/login">Login</a></li>
+            {% endif%} 
             <li style="float:right"><a href="/register">Register</a></li>
         </ul>
 
@@ -45,37 +51,45 @@
 
             <br>
 
+            <!-- If it's a valid city -->
+            {% if location == "Brisbane" or location == "Sydney" or location == "Perth" or location == "Hobart" %}
+            
             <div class="map">
-                <!-- If it's a valid city -->
-                {% if location == "Brisbane" or location == "Sydney" or location == "Perth" or location == "Hobart" %}
+                <!-- Change button to green -->
+                <script>document.getElementById("btn{{location}}").style.background='#22aa22';</script>
 
-                    <!-- Change button to green -->
-                    <script>document.getElementById("btn{{location}}").style.background='#22aa22';</script>
+                <p>Temporary map of {{location}}. Insert map here:</p>
 
-                    <p>Temporary map of {{location}}. Insert map here:</p>
+                <img id="map_img" src="{% static map %}" />
+                <!-- Tiles -->
+                <div class="list">
+                    {% if len > 0  %}<p>Found {{len}} place(s):</p>{% elif len == -1 %} {% else %}<p>No results found.</p>{% endif %}
 
-                    <img id="map_img" src="{% static map %}" />
-                    <!-- Tiles -->
-                    <div class="list">
-                        {% if len > 0  %}<p>Found {{len}} place(s):</p>{% elif len == -1 %} {% else %}<p>No results found.</p>{% endif %}
-
-                        <form method="GET">
-                            
-                            {% for result in results %}
-                                <input id="btnRes{{forloop.counter0}}" class="tile_medium" type="button" value="{{result.map_item_name}}" name="result"/>
-                            {% endfor%}
-                            
-                        </form>
-                    </div>
-
-                {% else %}
-
-                    <h1>Please select a city or <a class="hyperlinks" href="/login">login</a> to continue.</h1>
-                    <h1>Not registered? Register <a class="hyperlinks" href="/register">here.</a></h1>
-                    
-                {% endif %}
+                    <form method="GET">
+                        
+                        {% for result in results %}
+                            <input id="btnRes{{forloop.counter0}}" class="tile_medium" type="button" value="{{result.map_item_name}}" name="result"/>
+                        {% endfor%}
+                        
+                    </form>
+                </div>
             </div>
+            <br>
+            <div>
+                <p>Check out some of these places below, which relate to your interests: </p>
 
+                <form method="GET">
+                    
+                    {% for result in top_ten %}
+                        <input id="btnTopTenRes{{forloop.counter0}}" class="tile_medium" type="button" value="{{result.map_item_name}}" name="toptenresult"/>
+                    {% endfor%}
+                    
+                </form>
+            </div>
+            {% else %}
+                <h1>Please select a city or <a class="hyperlinks" href="/login">login</a> to continue.</h1>
+                <h1>Not registered? Register <a class="hyperlinks" href="/register">here.</a></h1>
+            {% endif %}
         </content>
     </body>
 </html>

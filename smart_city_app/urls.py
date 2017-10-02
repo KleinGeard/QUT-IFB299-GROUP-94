@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^login/$', auth_views.login, {'template_name': 'smart_city_app/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'smart_city_app/logout.html'}, name='logout'),
-    #url(r'^register/$', views.register, name='register'),
+    url(r'^register/$', views.register, name='register'),
 ]

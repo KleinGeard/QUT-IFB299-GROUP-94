@@ -1,11 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from smart_city_app.models import map_item
-from smart_city_app.queries import map_search, map_search_no_city
+from smart_city_app.queries import map_search, get_10_items
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import Group
+from django.contrib.auth.forms import UserCreationForm
 
 # Welcome/home page view
 def index(request):
     page_title = 'Smart City - Welcome Page'
+    group_id = 0
 
     # initialize set of results
     results = []
@@ -20,6 +24,13 @@ def index(request):
     map_image = ''
     if (location != None):
         map_image = location.lower() + '-map.PNG'
+    
+    if (request.user.is_authenticated()):
+        groups = request.user.groups.all()
+        group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(groups[0]))[0].id
+        top_ten = map_item.objects.raw(get_10_items.format(group_id))
+    else:
+        top_ten = {''}
 
     # Only update the session variable if it's not empty
     if (q != None and q != ''):
@@ -41,6 +52,8 @@ def index(request):
         "map": map_image,
         "results": results,
         "len":result_count,
+        "top_ten":top_ten,
+        "group_id":group_id,
     })
 
 def about(request):
@@ -62,23 +75,25 @@ def contact(request):
         "page_title": page_title
         
     })
-    
-def login(request):
-    page_title = 'Smart City - Login'
-
-    return render(request, "smart_city_app/login.html",
-    {
-        # Pass variables into template
-        "page_title": page_title
-        
-    })
 
 def register(request):
     page_title = 'Smart City - Registration'
 
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = UserCreationForm()
+
     return render(request, "smart_city_app/register.html",
     {
         # Pass variables into template
-        "page_title": page_title
-        
+        "page_title": page_title,
+        "form": form,
     })
