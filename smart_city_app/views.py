@@ -82,6 +82,7 @@ def contact(request):
 def register(request):
     page_title = 'Smart City - Registration'
 
+    # https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
