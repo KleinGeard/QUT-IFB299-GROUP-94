@@ -10,6 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 def index(request):
     page_title = 'Smart City - Welcome Page'
     group_id = 0
+    top_ten = {}
 
     # initialize set of results
     results = []
@@ -27,10 +28,9 @@ def index(request):
     
     if (request.user.is_authenticated()):
         groups = request.user.groups.all()
-        group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(groups[0]))[0].id
-        top_ten = map_item.objects.raw(get_10_items.format(group_id))
-    else:
-        top_ten = {''}
+        if (len(groups) > 0):
+            group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(groups[0]))[0].id
+            top_ten = map_item.objects.raw(get_10_items.format(group_id))
 
     # Only update the session variable if it's not empty
     if (q != None and q != ''):
@@ -43,6 +43,8 @@ def index(request):
     if (location != 'Brisbane' and location != 'Sydney' and location != 'Perth' and location != 'Hobart'):
         location = 'Australia' # I know it's not a city btw
 
+    top_ten_len = len(list(top_ten))
+
     # Construct the markup based on the template, and variables
     return render(request, "smart_city_app/index.html",
     {
@@ -53,6 +55,7 @@ def index(request):
         "results": results,
         "len":result_count,
         "top_ten":top_ten,
+        "top_ten_len":top_ten_len,
         "group_id":group_id,
     })
 
