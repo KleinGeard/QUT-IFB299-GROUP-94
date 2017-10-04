@@ -3,17 +3,18 @@
 <html lang="en">
     <head>
         <title> {{ page_title }} </title>
+
         <!-- STATIC FILES -->
-        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen"/>
-        <link href="{%  static 'favicon.ico' %}" rel="shortcut icon"/>
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen">
+        <link href="{%  static 'favicon.ico' %}" rel="shortcut icon">
         <!-- END STATIC FILES -->
     </head>
     <body>
-        <img src="{% static 'logo.png' %}"/>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact" class="active">Contact Us</a></li>
+        <img src="{% static 'logo.png' %}" />
+        <ul class="nav-bar">
+            <li class="nav-link"><a href="/">Home</a></li>
+            <li class="nav-link"><a href="/about">About</a></li>
+            <li class="nav-link"><a href="/contact" class="active">Contact Us</a></li>
             {% if user.is_authenticated %}
                 <li class="nav-link" style="float:right"><a href="/logout">Logout</a></li>
             {% else %}
@@ -21,6 +22,7 @@
             {% endif%}
             <li class="nav-link" style="float:right"><a href="/register">Register</a></li>
         </ul>
+        
         <content>
             <br>
             <h1>Contact details</h1>
