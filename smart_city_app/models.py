@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 
 # Using the same model for all of the item types
 class map_item(models.Model):

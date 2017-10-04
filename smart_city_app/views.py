@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from smart_city_app.models import map_item
-from smart_city_app.queries import map_search, get_10_items
-from django.contrib.auth import login, authenticate
+from smart_city_app.queries import map_search
+from smart_city_app.queries import get_10_items
+from django.contrib.auth import login
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import UserCreationForm
 
