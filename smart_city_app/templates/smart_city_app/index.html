@@ -58,9 +58,12 @@
                 <!-- Change button to green -->
                 <script>document.getElementById("btn{{location}}").style.background='#22aa22';</script>
 
-                <p>Temporary map of {{location}}. Insert map here:</p>
-
-                <img id="map_img" src="{% static map %}" />
+				{% if query != None %}
+                <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q={{query}}+{{location}}&key=AIzaSyAsWAS2N7seClMFwfjVnKuH28vThYFd5io" allowfullscreen></iframe>
+				{% else %}
+				<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q={{location}}&key=AIzaSyAsWAS2N7seClMFwfjVnKuH28vThYFd5io" allowfullscreen></iframe>
+				{% endif %}
+				
                 <!-- Tiles -->
                 <div class="list">
                     {% if len > 0  %}<p>Found {{len}} place(s):</p>{% elif len == -1 %} {% else %}<p>No results found.</p>{% endif %}
