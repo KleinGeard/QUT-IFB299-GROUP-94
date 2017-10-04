@@ -3,31 +3,36 @@
 <html lang="en">
     <head>
         <title>{{ page_title }}</title>
+
         <!-- STATIC FILES -->
-        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen"/>
-        <link href="{%  static 'favicon.ico' %}" rel="shortcut icon"/>
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen">
+        <link href="{%  static 'favicon.ico' %}" rel="shortcut icon">
+        <script src="{% static 'js/scripts.js' %}"></script>
         <!-- END STATIC FILES -->
     </head>
     <body>
-        <img src="{% static 'logo.png' %}"/>
-        <ul>
-            <li><a href="/" class="active">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact Us</a></li>
+        <img src="{% static 'logo.png' %}" />
+        <ul class="nav-bar">
+            <li class="nav-link"><a href="/" class="active">Home</a></li>
+            <li class="nav-link"><a href="/about">About</a></li>
+            <li class="nav-link"><a href="/contact">Contact Us</a></li>
             {% if user.is_authenticated %}
                 <li class="nav-link" style="float:right"><a href="/logout">Logout</a></li>
                 {% if group_id == 1 %}
                     <li class="nav-link"><a href="/editor">Edit places</a></li>
                 {% endif %}
             {% else %}
-                <li style="float:right"><a href="/login">Login</a></li>
-            {% endif %} 
-            <li style="float:right"><a href="/register">Register</a></li>
+                <li class="nav-link" style="float:right"><a href="/login">Login</a></li>
+            {% endif%} 
+            <li class="nav-link" style="float:right"><a href="/register">Register</a></li>
         </ul>
+
         <content>
-            <br/>
-            <p>Welcome to Smart City: your guide to {{ location }}! Below is a map tool which you can use to find places in the city in which you're interested!</p>
-            <br/>
+            <br>
+            <p>
+                Welcome to Smart City: your guide to {{ location }}! Below is a map tool which you can use to find places in the city in which you're interested!
+            </p>
+            <br>
             <!-- Store city in the url, to allow for the sharing and bookmarking of urls. 
                 (tried doing this for the query but couldn't figure out how to store more than one parameter this way) -->
             <form method="GET">
@@ -39,43 +44,53 @@
             <!-- Store query in the session -->
             <form method="POST">
                 {% csrf_token %}
-                <br/>
-                <br/>
+                <br><br>
                 Search: <input id="txtSearch" name="query" type="text" placeholder="Find places here..."/>
                 <input id="btnSearch" class="tile_small" type="submit" value="Search"/>
             </form>
-            <br/>
+
+            <br>
+
             <!-- If it's a valid city -->
             {% if location == "Brisbane" or location == "Sydney" or location == "Perth" or location == "Hobart" %}
+            
             <div class="map">
                 <!-- Change button to green -->
                 <script>document.getElementById("btn{{location}}").style.background='#22aa22';</script>
+
 				{% if query != None %}
                     <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q={{query}}+{{location}}&key=AIzaSyAsWAS2N7seClMFwfjVnKuH28vThYFd5io" allowfullscreen></iframe>
 				{% else %}
 				    <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q={{location}}&key=AIzaSyAsWAS2N7seClMFwfjVnKuH28vThYFd5io" allowfullscreen></iframe>
 				{% endif %}
+				
                 <!-- Tiles -->
                 <div class="list">
                     {% if len > 0  %}<p>Found {{len}} place(s):</p>{% elif len == -1 %} {% else %}<p>No results found.</p>{% endif %}
+
                     <form method="GET">
+                        
                         {% for result in results %}
                             <input id="btnRes{{forloop.counter0}}" class="tile_medium" type="button" value="{{result.map_item_name}}" name="result"/>
                         {% endfor%}
+                        
                     </form>
                 </div>
             </div>
-            <br/>
+            <br>
             {% if user.is_authenticated and top_ten_len > 0 %}
                 <div>
                     <p>Check out some of these places below, which relate to your interests: </p>
+
                     <form method="GET">
+                        
                         {% for result in top_ten %}
                             <input id="btnTopTenRes{{forloop.counter0}}" class="tile_medium" type="button" value="{{result.map_item_name}}" name="toptenresult"/>
-                        {% endfor %}
+                        {% endfor%}
+                        
                     </form>
                 </div>
-            {% endif %}
+            {%endif%}
             {% else %}
                 <h1>Please select a city or <a class="hyperlinks" href="/login">login</a> to continue.</h1>
                 <h1>Not registered? Register <a class="hyperlinks" href="/register">here.</a></h1>

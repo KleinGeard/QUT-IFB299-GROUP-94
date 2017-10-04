@@ -3,19 +3,22 @@
 <html lang="en">
     <head>
         <title> {{ page_title }} </title>
+
         <!-- STATIC FILES -->
-        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen"/>
-        <link href="{%  static 'favicon.ico' %}" rel="shortcut icon"/>
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen">
+        <link href="{%  static 'favicon.ico' %}" rel="shortcut icon">
+        <script src="{% static 'js/scripts.js' %}"></script>
         <!-- END STATIC FILES -->
     </head>
     <body>
-        <img src="{% static 'logo.png' %}"/>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-            <li style="float:right"><a href="/register">Register</a></li>
+        <img src="{% static 'logo.png' %}" />
+        <ul class="nav-bar">
+            <li class="nav-link"><a href="/">Home</a></li>
+            <li class="nav-link"><a href="/about">About</a></li>
+            <li class="nav-link"><a href="/contact">Contact Us</a></li>
+            <li class="nav-link" style="float:right"><a href="/register">Register</a></li>
         </ul>
+
         <!-- https://simpleisbetterthancomplex.com/tutorial/2016/06/27/how-to-use-djangos-built-in-login-system.html -->
         <h2>Login</h2>
         <form method="post">
