@@ -33,10 +33,6 @@ def index(request):
             group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(groups[0]))[0].id
             top_ten = map_item.objects.raw(get_10_items.format(group_id))
 
-<<<<<<< HEAD
-=======
-    # Only update the session variable if it's not empty
->>>>>>> 6cacb8ed5be1941428a606b3b4d90310701dbe21
     if (q):
         request.session['query'] = q
         
