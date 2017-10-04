@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponse
 from smart_city_app.models import map_item
 from smart_city_app.queries import map_search
@@ -13,8 +14,6 @@ def index(request):
     page_title = 'Smart City - Welcome Page'
     group_id = 0
     top_ten = {}
-
-    # initialize set of results
     results = []
     # if no search has occurred (this is the purpose of -1), don't display any text, if 0, 
     # display "No results found", else it'll display "Results for..."
@@ -34,16 +33,14 @@ def index(request):
             group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(groups[0]))[0].id
             top_ten = map_item.objects.raw(get_10_items.format(group_id))
 
-    # Only update the session variable if it's not empty
     if (q):
         request.session['query'] = q
         
         results = map_item.objects.raw(map_search.format(q,location))
         result_count = len(list(results))
     
-    # If none of the valid cities, set to Australia
     if (location != 'Brisbane' and location != 'Sydney' and location != 'Perth' and location != 'Hobart'):
-        location = 'Australia' # I know it's not a city btw
+        location = 'Australia'
 
     top_ten_len = len(list(top_ten))
 
@@ -69,7 +66,6 @@ def about(request):
     {
         # Pass variables into template
         "page_title": page_title
-        
     })
 
 def contact(request):
@@ -79,7 +75,6 @@ def contact(request):
     {
         # Pass variables into template
         "page_title": page_title
-        
     })
 
 def register(request):
