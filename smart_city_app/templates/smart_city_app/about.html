@@ -5,27 +5,26 @@
         <title> {{ page_title }} </title>
 
         <!-- STATIC FILES -->
-        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen">
-        <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
-        <script src="{% static 'js/scripts.js' %}"></script>
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen"/>
+        <link href="{%  static 'favicon.ico' %}" rel="shortcut icon"/>
+        <script src="{% static 'js/scripts.js' %}"/>
         <!-- END STATIC FILES -->
     </head>
     <body>
         <img src="{% static 'logo.png' %}" />
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/about" class="active">About</a></li>
+            <li><a href="/about" class="active"/>About</a></li>
             <li><a href="/contact">Contact Us</a></li>
             {% if user.is_authenticated %}
-                <li style="float:right"><a href="/logout">Logout</a></li>
+                <li style="float:right"><a href="/logout"/>Logout</a></li>
             {% else %}
-                <li style="float:right"><a href="/login">Login</a></li>
-            {% endif%} 
-            <li style="float:right"><a href="/register">Register</a></li>
+                <li style="float:right"><a href="/login"/>Login</a></li>
+            {% endif %} 
+            <li style="float:right"><a href="/register"/>Register</a></li>
         </ul>
-
         <content>
-            <br>
+            <br/>
             <h1>About Smart City</h1>
             <p>
                 The purpose of this website is to view information about locations around various cities. 
