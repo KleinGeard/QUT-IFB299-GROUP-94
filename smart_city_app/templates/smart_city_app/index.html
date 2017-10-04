@@ -16,9 +16,9 @@
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact Us</a></li>
             {% if user.is_authenticated %}
-                <li style="float:right"><a href="/logout">Logout</a></li>
+                <li class="nav-link" style="float:right"><a href="/logout">Logout</a></li>
                 {% if group_id == 1 %}
-                    <li><a href="/editor">Edit places</a></li>
+                    <li class="nav-link"><a href="/editor">Edit places</a></li>
                 {% endif %}
             {% else %}
                 <li style="float:right"><a href="/login">Login</a></li>
