@@ -57,6 +57,7 @@ def index(request):
         "top_ten":top_ten,
         "top_ten_len":top_ten_len,
         "group_id":group_id,
+		"query":q,
     })
 
 def about(request):
