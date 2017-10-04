@@ -35,7 +35,7 @@ def index(request):
             top_ten = map_item.objects.raw(get_10_items.format(group_id))
 
     # Only update the session variable if it's not empty
-    if (q != None and q != ''):
+    if (q):
         request.session['query'] = q
         
         results = map_item.objects.raw(map_search.format(q,location))
