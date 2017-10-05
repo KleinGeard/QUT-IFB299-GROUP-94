@@ -24,7 +24,7 @@ def index(request):
 
     # Construct the map file name
     map_image = ''
-    if (location != None):
+    if (location):
         map_image = location.lower() + '-map.PNG'
     
     if (request.user.is_authenticated()):
@@ -35,7 +35,6 @@ def index(request):
 
     if (q):
         request.session['query'] = q
-        
         results = map_item.objects.raw(map_search.format(q,location))
         result_count = len(list(results))
     
