@@ -21,11 +21,6 @@ def index(request):
 
     location = request.GET.get('city') # Stored as a url parameter so users can bookmark the url with a specific city
     q = request.POST.get('query') # Retrieve map search query from text field
-
-    # Construct the map file name
-    map_image = ''
-    if (location):
-        map_image = location.lower() + '-map.PNG'
     
     if (request.user.is_authenticated()):
         groups = request.user.groups.all()
@@ -49,7 +44,6 @@ def index(request):
         # Pass variables into template
         "page_title": page_title,
         "location": location,
-        "map": map_image,
         "results": results,
         "len":result_count,
         "top_ten":top_ten,
