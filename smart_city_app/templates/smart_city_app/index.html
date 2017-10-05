@@ -59,7 +59,11 @@
 				{% endif %}
                 <!-- Tiles -->
                 <div class="list">
-                    {% if len > 0  %}<p>Found {{len}} place(s):</p>{% elif len == -1 %} {% else %}<p>No results found.</p>{% endif %} 
+                    {% if len > 0  %}
+                        <p>Found {{len}} place(s):</p>
+                    {% elif len != -1 %}
+                        <p>No results found.</p>
+                    {% endif %} 
                     {% for result in results %}
                         <a style="text-decoration: none" id="btnRes{{forloop.counter0}}" class="tile_medium" target="iframe" href="https://www.google.com/maps/embed/v1/search?q={{result.map_item_name}}+{{location}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M">
                             <input id="btnRes{{forloop.counter0}}" class="tile_medium" type="button" value="{{result.map_item_name}}" name="result"/>
