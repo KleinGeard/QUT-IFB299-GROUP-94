@@ -49,6 +49,7 @@
                 <br><br>
                 Search: <input id="txtSearch" name="query" type="text" placeholder="Find places here..."/>
                 <input id="btnSearch" class="tile_small" type="submit" value="Search" name="search"/>
+                <input id="btnDirections" class="tile_small" type="submit" value="Get Directions" name="directions"/>
 
                 <input hidden id="lat" name="lat"/>
                 <input hidden id="long" name="long"/>
@@ -86,9 +87,13 @@
                 -->    
                 <script>document.getElementById("btn{{location}}").style.background='#22aa22';</script>
                 {% if query != None %}
-                <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&origin={{latitude}},{{longitude}}&destination={{query}},_{{location}}_Australia" allowfullscreen></iframe>
+                    {% if request_type == "directions" %}
+                        <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&origin={{latitude}},{{longitude}}&destination={{query}},_{{location}}_Australia" allowfullscreen></iframe>
+                    {% else %}
+                        <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q={{query}},+{{location}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M" allowfullscreen></iframe>
+                    {% endif %}
                 {% else %}
-                <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q={{location}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M" allowfullscreen></iframe>
+                    <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q={{location}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M" allowfullscreen></iframe>
                 {% endif %}
                 <!-- Tiles -->
                 <div class="list">
@@ -115,7 +120,11 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-            {% elif not user.is_authenticated %}
+            {% else %}
+            <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&q={{latitude}},{{longitude}}" allowfullscreen></iframe>
+            {% endif %}
+
+            {% if not user.is_authenticated %}
                 <h1>Please select a city or <a class="hyperlinks" href="/login">login</a> to continue.</h1>
                 <h1>Not registered? Register <a class="hyperlinks" href="/register">here.</a></h1>
             {% endif %}

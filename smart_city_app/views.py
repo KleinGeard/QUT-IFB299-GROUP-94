@@ -41,6 +41,13 @@ def index(request):
     latitude = request.POST.get('lat')
     longitude = request.POST.get('long')
 
+    request_type = ""
+    if request.method == 'POST':
+        if request.POST.get("search"):
+            request_type = "search"
+        elif request.POST.get("directions"):
+            request_type = "directions"
+
     # Construct the markup based on the template, and variables
     return render(request, "smart_city_app/index.html",
     {
@@ -55,6 +62,7 @@ def index(request):
 		"query":q,
         "latitude":latitude,
         "longitude":longitude,
+        "request_type":request_type,
     })
 
 def about(request):
