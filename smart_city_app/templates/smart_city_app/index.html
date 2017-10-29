@@ -59,13 +59,14 @@
             
             
             <script>
-                var x = document.getElementById("demo");
                 
                 function getLocation() {
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(showPosition);
                     } else { 
-                        x.innerHTML = "Geolocation is not supported by this browser.";
+                        //default coordinates = Brisbane
+                        lat.value = "-27.4698";
+                        long.value = "153.0251";
                     }
                 }
                 
