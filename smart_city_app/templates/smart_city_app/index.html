@@ -30,8 +30,6 @@
             <li class="nav-link" style="float:right"><a href="/register">Register</a></li>
         </ul>
         <content>
-               
-
             <br/>
             <p>
                 Welcome to Smart City: your guide to {{ location }}! Below is a map tool which you can use to find places in the city in which you're interested!
@@ -57,9 +55,7 @@
             </form>
             <br/>
             
-            
             <script>
-                
                 function getLocation() {
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(showPosition);
@@ -82,7 +78,7 @@
             </script>
             <!-- If it's a valid city -->
             {% if location == "Brisbane" or location == "Sydney" or location == "Perth" or location == "Hobart" %}
-            <div class="map">
+                <div class="map">
                 <!-- Change button to green -->
                 <!--
                 <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&q={{latitude}},{{longitude}}" allowfullscreen></iframe>
@@ -90,9 +86,9 @@
                 -->    
                 <script>document.getElementById("btn{{location}}").style.background='#22aa22';</script>
                 {% if query != None %}
-                    <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&origin={{latitude}},{{longitude}}&destination={{query}},_{{location}}_Australia" allowfullscreen></iframe>
-                    {% else %}
-                    <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q={{location}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M" allowfullscreen></iframe>
+                <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&origin={{latitude}},{{longitude}}&destination={{query}},_{{location}}_Australia" allowfullscreen></iframe>
+                {% else %}
+                <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q={{location}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M" allowfullscreen></iframe>
                 {% endif %}
                 <!-- Tiles -->
                 <div class="list">
@@ -107,9 +103,9 @@
                         </a>
                     {% endfor %}
                 </div>
-            </div>
-            <br/>
-            {% if user.is_authenticated and top_ten_len > 0 %}
+                </div>
+                <br/>
+                {% if user.is_authenticated and top_ten_len > 0 %}
                 <div>
                     <p>Check out some of these places below, which relate to your interests: </p>
                     {% for result in top_ten %}
@@ -118,7 +114,7 @@
                         </a>
                     {% endfor %}
                 </div>
-            {% endif %}
+                {% endif %}
             {% elif not user.is_authenticated %}
                 <h1>Please select a city or <a class="hyperlinks" href="/login">login</a> to continue.</h1>
                 <h1>Not registered? Register <a class="hyperlinks" href="/register">here.</a></h1>
