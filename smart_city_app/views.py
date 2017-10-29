@@ -38,6 +38,9 @@ def index(request):
 
     top_ten_len = len(list(top_ten))
 
+    latitude = request.POST.get('lat')
+    longitude = request.POST.get('long')
+
     # Construct the markup based on the template, and variables
     return render(request, "smart_city_app/index.html",
     {
@@ -50,6 +53,8 @@ def index(request):
         "top_ten_len":top_ten_len,
         "group_id":group_id,
 		"query":q,
+        "latitude":latitude,
+        "longitude":longitude,
     })
 
 def about(request):

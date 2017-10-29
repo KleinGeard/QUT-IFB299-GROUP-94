@@ -10,6 +10,10 @@
         <!-- END STATIC FILES -->
     </head>
     <body>
+            
+            
+
+
         <img src="{% static 'logo.png' %}"/>
         <ul class="nav-bar">
             <li class="nav-link"><a href="/" class="active">Home</a></li>
@@ -26,6 +30,8 @@
             <li class="nav-link" style="float:right"><a href="/register">Register</a></li>
         </ul>
         <content>
+               
+
             <br/>
             <p>
                 Welcome to Smart City: your guide to {{ location }}! Below is a map tool which you can use to find places in the city in which you're interested!
@@ -44,19 +50,49 @@
                 {% csrf_token %}
                 <br><br>
                 Search: <input id="txtSearch" name="query" type="text" placeholder="Find places here..."/>
-                <input id="btnSearch" class="tile_small" type="submit" value="Search"/>
+                <input id="btnSearch" class="tile_small" type="submit" value="Search" name="search"/>
+
+                <input hidden id="lat" name="lat"/>
+                <input hidden id="long" name="long"/>
             </form>
             <br/>
+            
+            
+            <script>
+                var x = document.getElementById("demo");
+                
+                function getLocation() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition);
+                    } else { 
+                        x.innerHTML = "Geolocation is not supported by this browser.";
+                    }
+                }
+                
+                getLocation();
+
+                function showPosition(position) {
+                    var s = position.coords.latitude + "";
+                    var e = position.coords.longitude + "";
+                    lat.value = s;
+                    long.value = e;
+                    
+                }
+            </script>
             <!-- If it's a valid city -->
             {% if location == "Brisbane" or location == "Sydney" or location == "Perth" or location == "Hobart" %}
             <div class="map">
                 <!-- Change button to green -->
+                <!--
+                <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&q={{latitude}},{{longitude}}" allowfullscreen></iframe>
+                <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&origin={{latitude}},{{longitude}}&destination={{query}}" allowfullscreen></iframe>
+                -->    
                 <script>document.getElementById("btn{{location}}").style.background='#22aa22';</script>
-				{% if query != None %}
-                    <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q={{query}}+{{location}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M" allowfullscreen></iframe>
-				{% else %}
-				    <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q={{location}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M" allowfullscreen></iframe>
-				{% endif %}
+                {% if query != None %}
+                    <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&origin={{latitude}},{{longitude}}&destination={{query}},_{{location}}_Australia" allowfullscreen></iframe>
+                    {% else %}
+                    <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q={{location}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M" allowfullscreen></iframe>
+                {% endif %}
                 <!-- Tiles -->
                 <div class="list">
                     {% if len > 0  %}
@@ -87,5 +123,6 @@
                 <h1>Not registered? Register <a class="hyperlinks" href="/register">here.</a></h1>
             {% endif %}
         </content>
+        
     </body>
 </html>
