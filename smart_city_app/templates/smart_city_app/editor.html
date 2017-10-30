@@ -39,7 +39,9 @@
             Department: <input type="text" name="depart" id="depart" value="{{place.map_item_department}}"/><br>
             Email: <input type="email" name="email" id="email" value="{{place.map_item_email}}"/><br>
             Phone: <input type="text" name="phone" id="phone" value="{{place.map_item_phone}}"/><br>
-            Group: <input type="text" name="group" id="group" value="{{place.name}}"/><br>
+            <span title="Businessmen, Students, tourists"> <!-- temporary until dropdown list is added -->
+                    Group: <input type="text" name="group" id="group" value="{{place.name}}"/><br>
+            </span>
             <br>
             <input class="tile_small" type="submit" name="submit" id="submit" value="Submit"/>
         </form>

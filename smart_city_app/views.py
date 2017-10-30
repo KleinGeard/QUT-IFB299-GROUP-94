@@ -3,8 +3,7 @@ from django.shortcuts import redirect
 from django.db import connection
 from django.http import HttpResponse, HttpResponseRedirect
 from smart_city_app.models import map_item
-from smart_city_app.queries import map_search
-from smart_city_app.queries import get_10_items
+from smart_city_app.queries import map_search, get_10_items, update_map_items, insert_map_item
 from django.contrib.auth import login
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group, User
@@ -111,7 +110,7 @@ def editor(request):
                 auth_group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(group))
                 auth_group_id = list(auth_group_id)[0].id
             with connection.cursor() as cursor:
-                cursor.execute("UPDATE smart_city_app_map_item SET map_item_name='{}', map_item_address='{}', map_item_industry_type='{}', map_item_department='{}', map_item_email='{}', map_item_phone='{}', map_item_type_id={} WHERE map_item_id={};".format(name, addr, ind, depart, email, phone, int(auth_group_id), int(place_id)))
+                cursor.execute(update_map_items.format(name, addr, ind, depart, email, phone, int(auth_group_id), int(place_id)))
             return HttpResponseRedirect("/places")
         else:
             auth_group_id = 0
@@ -119,7 +118,7 @@ def editor(request):
                 auth_group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(group))
                 auth_group_id = list(auth_group_id)[0].id
             with connection.cursor() as cursor:
-                cursor.execute("INSERT INTO smart_city_app_map_item (map_item_name, map_item_address, map_item_industry_type, map_item_department, map_item_email, map_item_type_id, map_item_phone) VALUES ('{}','{}','{}','{}','{}',{},'{}');".format(name, addr, ind, depart, email, int(auth_group_id), phone))
+                cursor.execute(insert_map_item.format(name, addr, ind, depart, email, int(auth_group_id), phone))
             return HttpResponseRedirect("/places")
 
     group_id = get_group_id(request, Group)
