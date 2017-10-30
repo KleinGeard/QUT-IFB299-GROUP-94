@@ -8,12 +8,13 @@ from django.contrib.auth import login
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.forms import UserCreationForm
+from smart_city_app.functions import get_group_id
 
 # Welcome/home page view
 def index(request):
     
-    # u = User.objects.get(username='dev')
-    # u.set_password('dev')
+    # u = User.objects.get(username='dev') 
+    # u.set_password('dev') # getting around the password requirements
     # u.save()
 
     page_title = 'Smart City - Welcome Page'
@@ -71,19 +72,22 @@ def index(request):
     })
 
 def editor(request):
-    page_title = 'Smart City - editor'
+    page_title = 'Smart City - Editor'
     group_id = 0
+    place_id = request.GET.get('id')
 
-    place_id = request.GET.get('place_id')
     place = 0
+    count = 0
 
-    if (place_id != 0):
+    if (place_id == None):
+        place_id = 0
+
+    if (int(place_id) > 0):
         place = map_item.objects.raw("SELECT * FROM smart_city_app_map_item WHERE map_item_id={}".format(place_id))
+        count = len(list(place))
+        place = list(place)[0]
 
-    if (request.user.is_authenticated()):
-        groups = request.user.groups.all()
-        if (len(groups) > 0):
-            group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(groups[0]))[0].id
+    group_id = get_group_id(request, Group)
 
     if (group_id == 1):
         return render(request, "smart_city_app/editor.html",
@@ -91,35 +95,53 @@ def editor(request):
             # Pass variables into template
             "page_title": page_title,
             "place": place,
+            "place_id": int(place_id), # For some reason it's not always an integer, so this solves that!
+            "count": count,
+            "group_id": group_id,
         })
     else:
         return render(request, "smart_city_app/oops.html",{})
 
 def places(request):
-    page_title = 'Smart City - about'
+    page_title = 'Smart City - Places'
 
-    return render(request, "smart_city_app/about.html",
-    {
-        # Pass variables into template
-        "page_title": page_title
-    })
+    results = map_item.objects.raw("SELECT * FROM smart_city_app_map_item")
+    count = len(list(results))
+
+    group_id = get_group_id(request, Group)
+
+    if (group_id == 1):
+        return render(request, "smart_city_app/places.html",
+        {
+            # Pass variables into template
+            "page_title": page_title,
+            "group_id": group_id,
+            "results": results,
+            "count": count
+        })
+    else:
+        return render(request, "smart_city_app/oops.html",{})
 
 def about(request):
     page_title = 'Smart City - about'
+    group_id = get_group_id(request, Group)
 
     return render(request, "smart_city_app/about.html",
     {
         # Pass variables into template
-        "page_title": page_title
+        "page_title": page_title,
+        "group_id": group_id,
     })
 
 def contact(request):
     page_title = 'Smart City - contact'
+    group_id = get_group_id(request, Group)
 
     return render(request, "smart_city_app/contact.html",
     {
         # Pass variables into template
-        "page_title": page_title
+        "page_title": page_title,
+        "group_id": group_id,
     })
 
 def register(request):

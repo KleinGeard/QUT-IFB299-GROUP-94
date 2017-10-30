@@ -74,3 +74,21 @@ h1 {
     background-color: #111;
     color: white;
 }
+
+table, td, th {    
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+}
+
+tr:nth-child(even) {
+    background-color: #e5ffd4;
+}

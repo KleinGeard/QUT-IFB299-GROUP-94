@@ -7,6 +7,7 @@
         <link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen"/>
         <link href="{%  static 'favicon.ico' %}" rel="shortcut icon"/>
         <!-- END STATIC FILES -->
+
     </head>
     <body>
         <img src="{% static 'logo.png' %}" />
@@ -14,9 +15,33 @@
             <li class="nav-link"><a href="/">Home</a></li>
             <li class="nav-link"><a href="/about">About</a></li>
             <li class="nav-link"><a href="/contact">Contact Us</a></li>
-            <li class="nav-link" style="float:right"><a href="/login">Login</a></li>
-            <li class="nav-link" style="float:right"><a href="/register">Register</a></li>
+            {% if user.is_authenticated %}
+                <li class="nav-link" style="float:right"><a href="/logout">Logout</a></li>
+                {% if group_id == 1 %}
+                    <li class="nav-link"><a href="/places" class="active">Edit places</a></li>
+                {% endif %}
+                <li class="nav-link" style="float:right"><a href="/profile">{{user.username}}</a></li>
+            {% else %}
+                <li class="nav-link" style="float:right"><a href="/login">Login</a></li>
+                <li class="nav-link" style="float:right"><a href="/register">Register</a></li>
+            {% endif %}
         </ul>
-        <h2>You've been successfully logged out.</h2>
+        <h2>Places.</h2>
+        <table id="place_list">
+            {% for result in results %}
+                <tr>
+                    <td>{{result.map_item_id}}</td>
+                    <td>{{result.map_item_name}}</td>
+                    <td>{{result.map_item_address}}</td>
+                    <td>{{result.map_item_industry_type}}</td>
+                    <td>{{result.map_item_department}}</td>
+                    <td>{{result.map_item_email}}</td>
+                    <td>{{result.map_item_type_id}}</td>
+                    <td>{{result.map_item_phone}}</td>
+                    <td><a href="/editor?id={{result.map_item_id}}"><input id="edit" value="Edit" type="button" name="edit"></a></td>
+                    <td><input id="delete" value="Delete" type="button" name="delete"></td>
+                </tr>
+            {% endfor %}
+        </table>
     </body>
 </html>

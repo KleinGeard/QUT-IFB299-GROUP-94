@@ -22,14 +22,13 @@
             {% if user.is_authenticated %}
                 <li class="nav-link" style="float:right"><a href="/logout">Logout</a></li>
                 {% if group_id == 1 %}
-                    <li class="nav-link"><a href="/editor">Edit places</a></li>
-                {% else %}
-                <h1>{{ group_id }}</h1>
+                    <li class="nav-link"><a href="/places">Edit places</a></li>
                 {% endif %}
+                <li class="nav-link" style="float:right"><a href="/profile">{{user.username}}</a></li>
             {% else %}
                 <li class="nav-link" style="float:right"><a href="/login">Login</a></li>
-            {% endif %} 
-            <li class="nav-link" style="float:right"><a href="/register">Register</a></li>
+                <li class="nav-link" style="float:right"><a href="/register">Register</a></li>
+            {% endif %}
         </ul>
         <content>
             <br/>
