@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.http import HttpResponse
+from django.db import connection
+from django.http import HttpResponse, HttpResponseRedirect
 from smart_city_app.models import map_item
 from smart_city_app.queries import map_search
 from smart_city_app.queries import get_10_items
@@ -76,6 +77,14 @@ def editor(request):
     group_id = 0
     place_id = request.GET.get('id')
 
+    name = ""
+    addr = ""
+    ind = ""
+    depart = ""
+    email = ""
+    phone = ""
+    group = "" 
+
     place = 0
     count = 0
 
@@ -83,9 +92,35 @@ def editor(request):
         place_id = 0
 
     if (int(place_id) > 0):
-        place = map_item.objects.raw("SELECT * FROM smart_city_app_map_item WHERE map_item_id={}".format(place_id))
+        place = map_item.objects.raw("SELECT * FROM db.get_places WHERE map_item_id={}".format(place_id))
         count = len(list(place))
         place = list(place)[0]
+
+    if (request.method == "POST"):
+        name = request.POST.get('name')
+        addr = request.POST.get('addr')
+        ind = request.POST.get('ind')
+        depart = request.POST.get('depart')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        group = request.POST.get('group')  
+
+        if (int(place_id) > 0):
+            auth_group_id = 0
+            if (group != None):
+                auth_group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(group))
+                auth_group_id = list(auth_group_id)[0].id
+            with connection.cursor() as cursor:
+                cursor.execute("UPDATE smart_city_app_map_item SET map_item_name='{}', map_item_address='{}', map_item_industry_type='{}', map_item_department='{}', map_item_email='{}', map_item_phone='{}', map_item_type_id={} WHERE map_item_id={};".format(name, addr, ind, depart, email, phone, int(auth_group_id), int(place_id)))
+            return HttpResponseRedirect("/places")
+        else:
+            auth_group_id = 0
+            if (group != None):
+                auth_group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(group))
+                auth_group_id = list(auth_group_id)[0].id
+            with connection.cursor() as cursor:
+                cursor.execute("INSERT INTO smart_city_app_map_item (map_item_name, map_item_address, map_item_industry_type, map_item_department, map_item_email, map_item_type_id, map_item_phone) VALUES ('{}','{}','{}','{}','{}',{},'{}');".format(name, addr, ind, depart, email, int(auth_group_id), phone))
+            return HttpResponseRedirect("/places")
 
     group_id = get_group_id(request, Group)
 
@@ -105,7 +140,7 @@ def editor(request):
 def places(request):
     page_title = 'Smart City - Places'
 
-    results = map_item.objects.raw("SELECT * FROM db.get_places;")
+    results = map_item.objects.raw("SELECT * FROM db.get_places;") # selecting from a view, joining map_items and auth_group
     count = len(list(results))
 
     group_id = get_group_id(request, Group)
