@@ -30,7 +30,7 @@ def index(request):
     if (request.user.is_authenticated()):
         groups = request.user.groups.all()
         if (len(groups) > 0):
-            group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(groups[0].name))[0].id
+            group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}';".format(groups[0].name))[0].id
             top_ten = map_item.objects.raw(get_10_items.format(group_id))
 
     if (q):
