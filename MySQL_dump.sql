@@ -120,7 +120,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$36000$zF2A9ZPIPMiz$ZepOuY+c/BvYGtQQ9Eims3qoXPrhA047F8YxHPg/8Yo=','2017-09-04 05:37:40.407260',1,'admin','','','admin@smartcity.com',1,1,'2017-09-01 10:54:16.000000'),(2,'pbkdf2_sha256$36000$ZInmtS8GJ9za$hUOl38smRDfgMw0YS7zCwBBbb1QlJBjL3TPLBpTeYZc=',NULL,0,'businessman1','','','',0,1,'2017-09-01 10:56:59.000000'),(3,'pbkdf2_sha256$36000$Ijy4ZidNtJoe$AMyKzwQp1L0JbsdZQ2nvRkBYNQ4AXmGtv36NY03TFZo=',NULL,0,'student1','','','',0,1,'2017-09-01 10:57:22.000000'),(4,'pbkdf2_sha256$36000$dN0B7tI6BUsw$sloicUZiR1XwmzpQzS99iYxk2Zt35UleYr7wESTkUUE=',NULL,0,'tourist1','','','',0,1,'2017-09-01 10:57:55.000000'),(5,'pbkdf2_sha256$36000$rbGYtjnODQOT$zwycF7XNO5nUWd85xfyF7UMZ6NmhZbW4f/jD2IXXiaw=','2017-10-30 01:47:58.750336',0,'Thisisatest123','','','',1,1,'2017-10-02 10:26:14.566484'),(6,'pbkdf2_sha256$36000$TSvlGMIawXUP$5FoPPK9/GsmrguSzYHP7ZdI+T+jm6KsvGsyigq9ynAM=','2017-10-04 14:03:51.707597',0,'Thisisatest1234','','','',0,1,'2017-10-02 10:27:13.107537'),(7,'pbkdf2_sha256$36000$chGcu0TM0OP8$Yo7jJoa/7yb0FYvEOHuqJtfZR/PptlRqOjSc147+wsQ=','2017-10-02 12:30:32.109372',1,'danielfield','','','',1,1,'2017-10-02 12:28:27.529412'),(8,'pbkdf2_sha256$36000$9hBcttk3VQu6$Vq3DMOVc86R7RhY+PTkh0s6rrzsEvC2dAfR3GcdHKoM=','2017-10-02 12:41:40.907011',0,'Testuser123','','','',0,1,'2017-10-02 12:41:40.552864'),(9,'pbkdf2_sha256$36000$AAV3dyjNSNrj$YCwOn6syWNRnZanXFE1rNg7kcCt8FjhaMHsJVEJEvys=','2017-10-04 06:32:02.505491',0,'Onetwothree','','','',0,1,'2017-10-04 06:32:02.061048'),(10,'pbkdf2_sha256$36000$t5p6NejcWQd9$CKKy0anUgYT9H8L3V6n6AZDufX5RiwG20WEtbq6rIWg=','2017-10-04 12:22:32.958853',0,'Just_a_test1','','','',0,1,'2017-10-04 12:22:32.348757'),(11,'pbkdf2_sha256$36000$tIvfsMzSDTBd$nbWXUodvn6LqpGUHHYtsO9KZMGdzVZjQKEnKude9a+Q=','2017-10-04 12:25:31.751190',0,'adfcsdfdff','','','',0,1,'2017-10-04 12:25:31.300541'),(12,'pbkdf2_sha256$36000$w3phUkezaWsG$yiI1RbjB1O8XeI+qNmhRNTkkvetEx3UOKEk9MAvnk2w=','2017-10-30 01:31:46.921987',1,'Daniel','','','no@no.com',1,1,'2017-10-30 01:31:38.981442'),(13,'pbkdf2_sha256$36000$w74vDFjuqYJM$wzDruaELP4cNdGCAuhhjmDj2XAvQeNkoB3GoPZRUT+8=','2017-10-30 06:54:53.959130',1,'dev','','','',1,1,'2017-10-30 01:53:42.919770');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$36000$zF2A9ZPIPMiz$ZepOuY+c/BvYGtQQ9Eims3qoXPrhA047F8YxHPg/8Yo=','2017-09-04 05:37:40.407260',1,'admin','','','admin@smartcity.com',1,1,'2017-09-01 10:54:16.000000'),(2,'pbkdf2_sha256$36000$ZInmtS8GJ9za$hUOl38smRDfgMw0YS7zCwBBbb1QlJBjL3TPLBpTeYZc=',NULL,0,'businessman1','','','',0,1,'2017-09-01 10:56:59.000000'),(3,'pbkdf2_sha256$36000$Ijy4ZidNtJoe$AMyKzwQp1L0JbsdZQ2nvRkBYNQ4AXmGtv36NY03TFZo=',NULL,0,'student1','','','',0,1,'2017-09-01 10:57:22.000000'),(4,'pbkdf2_sha256$36000$dN0B7tI6BUsw$sloicUZiR1XwmzpQzS99iYxk2Zt35UleYr7wESTkUUE=',NULL,0,'tourist1','','','',0,1,'2017-09-01 10:57:55.000000'),(5,'pbkdf2_sha256$36000$rbGYtjnODQOT$zwycF7XNO5nUWd85xfyF7UMZ6NmhZbW4f/jD2IXXiaw=','2017-10-30 01:47:58.750336',0,'Thisisatest123','','','',1,1,'2017-10-02 10:26:14.566484'),(6,'pbkdf2_sha256$36000$TSvlGMIawXUP$5FoPPK9/GsmrguSzYHP7ZdI+T+jm6KsvGsyigq9ynAM=','2017-10-04 14:03:51.707597',0,'Thisisatest1234','','','',0,1,'2017-10-02 10:27:13.107537'),(7,'pbkdf2_sha256$36000$chGcu0TM0OP8$Yo7jJoa/7yb0FYvEOHuqJtfZR/PptlRqOjSc147+wsQ=','2017-10-02 12:30:32.109372',1,'danielfield','','','',1,1,'2017-10-02 12:28:27.529412'),(8,'pbkdf2_sha256$36000$9hBcttk3VQu6$Vq3DMOVc86R7RhY+PTkh0s6rrzsEvC2dAfR3GcdHKoM=','2017-10-02 12:41:40.907011',0,'Testuser123','','','',0,1,'2017-10-02 12:41:40.552864'),(9,'pbkdf2_sha256$36000$AAV3dyjNSNrj$YCwOn6syWNRnZanXFE1rNg7kcCt8FjhaMHsJVEJEvys=','2017-10-04 06:32:02.505491',0,'Onetwothree','','','',0,1,'2017-10-04 06:32:02.061048'),(10,'pbkdf2_sha256$36000$t5p6NejcWQd9$CKKy0anUgYT9H8L3V6n6AZDufX5RiwG20WEtbq6rIWg=','2017-10-04 12:22:32.958853',0,'Just_a_test1','','','',0,1,'2017-10-04 12:22:32.348757'),(11,'pbkdf2_sha256$36000$tIvfsMzSDTBd$nbWXUodvn6LqpGUHHYtsO9KZMGdzVZjQKEnKude9a+Q=','2017-10-04 12:25:31.751190',0,'adfcsdfdff','','','',0,1,'2017-10-04 12:25:31.300541'),(12,'pbkdf2_sha256$36000$w3phUkezaWsG$yiI1RbjB1O8XeI+qNmhRNTkkvetEx3UOKEk9MAvnk2w=','2017-10-30 01:31:46.921987',1,'Daniel','','','no@no.com',1,1,'2017-10-30 01:31:38.981442'),(13,'pbkdf2_sha256$36000$w74vDFjuqYJM$wzDruaELP4cNdGCAuhhjmDj2XAvQeNkoB3GoPZRUT+8=','2017-10-30 14:13:19.775465',1,'dev','','','',1,1,'2017-10-30 01:53:42.919770'),(14,'pbkdf2_sha256$36000$tPdHMXNPOBdJ$DZJBkRITFWWuuuxPeY4GR/O6wQcQHzZWI1vYAVyG6PY=','2017-10-30 14:11:51.222885',0,'Thisisatest12345','','','',0,1,'2017-10-30 14:11:50.998581');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,7 +294,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('8a79q674hhh2lb13g1tbif0hd6wqp7dy','NmZmMzJjOTYxMTk1MDRkNWFhYWI5NzNlNzBmMDg2YTU0NDAwM2FjNjp7InF1ZXJ5IjoicSJ9','2017-10-16 10:26:14.925788'),('b162wese3nc18ikmyhlqhjb8iqnt4152','OGYzNmJiNTY2NTViMzQ2YTFkODQ4ZWFjNWUwYzMzYzBhOGI0Y2YxNzp7InF1ZXJ5IjoidW5zdyJ9','2017-11-12 18:00:21.409360'),('cxi5l2nuhioa6j9vxsxbii7atxkaym7z','MmM2MTc2ZjdhMzYxMDAzYjlhNTY1NTI3NzA2OTk5OGJjOGNkOWY4OTp7Il9hdXRoX3VzZXJfaWQiOiIxMyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZGU5ZjA1ZGEwYjc1ZmFjNWU4NzRiOWM5YTE5ZjRkYWNmN2Y2ZjAyYyJ9','2017-11-13 01:54:41.278384'),('mj76fob45za0duvv8uiidgpqh8ugr42l','ZTFiNTYyNTBlZTEyMDQxYzA2YWNiM2Y1NjMzYWZmNTQ1MzRiMDUzMTp7Il9hdXRoX3VzZXJfaWQiOiIxMyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiOGI1MDAxYjcxY2RhMWExMmI4MDM0ZTAyZTQ5NDFlODE4NjUzNGI1NSIsInF1ZXJ5IjoicSJ9','2017-11-13 11:32:48.285139'),('npc6h4dn2fug6ktv3xrhxqpwojodk48n','YWE1ZjUzYjNiNGVlOGY2NzE1OWRiMmEyZTMwNzRlYzE0OGU2MWIzMjp7InF1ZXJ5IjoicXV0In0=','2017-10-20 11:40:18.005085'),('sh1wmdcm3v7gi7nvgcoa8ybauz23f6nw','MDFhNzNiY2JkZGVmMDM1OWFiNjk2NTVlMjc1YWEyZTA5Y2VhZmM5MTp7InF1ZXJ5IjoidW5pdmVyc2l0eSIsIl9hdXRoX3VzZXJfaWQiOiI2IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI4OTU3ZTJiZTZkMjc4MWZhYTY5ZDRlY2I3MzhkMDJkMzdhYWQ1MDk0In0=','2017-10-18 15:04:35.740943'),('slg628facvmcf2tyr781vgixb3diubkf','NmZmMzJjOTYxMTk1MDRkNWFhYWI5NzNlNzBmMDg2YTU0NDAwM2FjNjp7InF1ZXJ5IjoicSJ9','2017-09-18 06:57:34.633722');
+INSERT INTO `django_session` VALUES ('8a79q674hhh2lb13g1tbif0hd6wqp7dy','NmZmMzJjOTYxMTk1MDRkNWFhYWI5NzNlNzBmMDg2YTU0NDAwM2FjNjp7InF1ZXJ5IjoicSJ9','2017-10-16 10:26:14.925788'),('a49mm5ya3hti4333upo90mnn6t67fe2g','ZTFiNTYyNTBlZTEyMDQxYzA2YWNiM2Y1NjMzYWZmNTQ1MzRiMDUzMTp7Il9hdXRoX3VzZXJfaWQiOiIxMyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiOGI1MDAxYjcxY2RhMWExMmI4MDM0ZTAyZTQ5NDFlODE4NjUzNGI1NSIsInF1ZXJ5IjoicSJ9','2017-11-13 14:27:55.416548'),('b162wese3nc18ikmyhlqhjb8iqnt4152','OGYzNmJiNTY2NTViMzQ2YTFkODQ4ZWFjNWUwYzMzYzBhOGI0Y2YxNzp7InF1ZXJ5IjoidW5zdyJ9','2017-11-12 18:00:21.409360'),('cxi5l2nuhioa6j9vxsxbii7atxkaym7z','MmM2MTc2ZjdhMzYxMDAzYjlhNTY1NTI3NzA2OTk5OGJjOGNkOWY4OTp7Il9hdXRoX3VzZXJfaWQiOiIxMyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZGU5ZjA1ZGEwYjc1ZmFjNWU4NzRiOWM5YTE5ZjRkYWNmN2Y2ZjAyYyJ9','2017-11-13 01:54:41.278384'),('npc6h4dn2fug6ktv3xrhxqpwojodk48n','YWE1ZjUzYjNiNGVlOGY2NzE1OWRiMmEyZTMwNzRlYzE0OGU2MWIzMjp7InF1ZXJ5IjoicXV0In0=','2017-10-20 11:40:18.005085'),('sh1wmdcm3v7gi7nvgcoa8ybauz23f6nw','MDFhNzNiY2JkZGVmMDM1OWFiNjk2NTVlMjc1YWEyZTA5Y2VhZmM5MTp7InF1ZXJ5IjoidW5pdmVyc2l0eSIsIl9hdXRoX3VzZXJfaWQiOiI2IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI4OTU3ZTJiZTZkMjc4MWZhYTY5ZDRlY2I3MzhkMDJkMzdhYWQ1MDk0In0=','2017-10-18 15:04:35.740943'),('slg628facvmcf2tyr781vgixb3diubkf','NmZmMzJjOTYxMTk1MDRkNWFhYWI5NzNlNzBmMDg2YTU0NDAwM2FjNjp7InF1ZXJ5IjoicSJ9','2017-09-18 06:57:34.633722');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,7 +334,7 @@ CREATE TABLE `smart_city_app_map_item` (
   `map_item_type_id` int(11) NOT NULL,
   `map_item_phone` varchar(32) NOT NULL,
   PRIMARY KEY (`map_item_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,7 +343,7 @@ CREATE TABLE `smart_city_app_map_item` (
 
 LOCK TABLES `smart_city_app_map_item` WRITE;
 /*!40000 ALTER TABLE `smart_city_app_map_item` DISABLE KEYS */;
-INSERT INTO `smart_city_app_map_item` VALUES (1,'UQ','Who cares? Somewhere in Brisbane.','sdfnksjfn','jnkjnjkgbkhb','cdsgsfdlmk',3,'618752455'),(2,'made up place','123453csdcrwsvioskfmbrisbane','haha','no','k',3,'123'),(3,'QUT','123 fake st, Brisbane, QLD','test','test1','test2',3,'143954648');
+INSERT INTO `smart_city_app_map_item` VALUES (1,'UQ','Brisbane','sdfnksjfn','jnkjnjkgbkhb','cdsgsfdlmk@a.com',3,'618752455'),(2,'made up place','123453csdcrwsvioskfmbrisbane','haha','no','k@m.s',3,'123'),(3,'QUT','2 George St Brisbane, QLD 4000','Education','','askqut@qut.edu.au',3,'143954648'),(4,'test place','test addr','boring stuff','idk','idk@idk.idklol',2,'1230i495u4252q31cwerwfw'),(5,'a','1 pretend rd, Brisbane','a','1','a@a.a',4,'1');
 /*!40000 ALTER TABLE `smart_city_app_map_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -382,4 +382,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-30 22:21:29
+-- Dump completed on 2017-10-31  0:34:09
