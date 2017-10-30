@@ -105,7 +105,7 @@ def editor(request):
 def places(request):
     page_title = 'Smart City - Places'
 
-    results = map_item.objects.raw("SELECT * FROM smart_city_app_map_item")
+    results = map_item.objects.raw("SELECT * FROM db.get_places;")
     count = len(list(results))
 
     group_id = get_group_id(request, Group)
