@@ -27,9 +27,12 @@
             {% endif %}
         </ul>
         <h2>Places.</h2>
-        <a href="/editor?id=0"><input id="add" value="Add new place" type="button" name="add"/></a>
+        <a href="/editor?id=0"><input style="background-color: rgb(36, 255, 36); color: rgb(0, 0, 0); height: 35px; border-style:none; border-radius: 8px; font-family: sans-serif; font-size: 18px;" id="add" value="Add new place" type="button" name="add"/></a>
         <hr>
         <table id="place_list">
+            <tr>
+                <td><b>ID</b></td><td><b>Name</b></td><td><b>Address</b></td><td><b>Industry type</b></td><td><b>Department</b></td><td><b>email</b></td><td><b>Phone</b></td><td><b>type ID</b></td>
+            </tr>
             {% for result in results %}
                 <tr>
                     <td>{{result.map_item_id}}</td>
@@ -38,10 +41,10 @@
                     <td>{{result.map_item_industry_type}}</td>
                     <td>{{result.map_item_department}}</td>
                     <td>{{result.map_item_email}}</td>
-                    <td>{{result.map_item_type_id}}</td>
                     <td>{{result.map_item_phone}}</td>
-                    <td><a href="/editor?id={{result.map_item_id}}"><input id="edit" value="Edit" type="button" name="edit"/></a></td>
-                    <td><input id="delete" value="Delete" type="button" name="delete"/></td>
+                    <td>{{result.map_item_type_id}}</td>
+                    <td><a href="/editor?id={{result.map_item_id}}"><input style="background-color: rgb(209, 209, 0); color: rgb(0, 0, 0); height: 35px; border-style:none; border-radius: 8px; font-family: sans-serif; font-size: 18px;" id="edit" value="Edit" type="button" name="edit"/></a></td>
+                    <td><input style="background-color: rgb(207, 38, 38); color: rgb(0, 0, 0); height: 35px; border-style:none; border-radius: 8px; font-family: sans-serif; font-size: 18px;" id="delete" value="Delete" type="button" name="delete"/></td>
                 </tr>
             {% endfor %}
         </table>

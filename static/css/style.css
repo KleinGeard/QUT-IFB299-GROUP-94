@@ -25,6 +25,20 @@ h1 {
     color: white;
 }
 
+.tile_small2 {
+    background-color: #333;
+    color: white;
+    height: 25px;
+    border-style: none;
+    font-family: sans-serif;
+    font-size: 18px;
+}
+
+.tile_small2:hover {
+    background-color: #111;
+    color: white;
+}
+
 /* some snippets from https://www.w3schools.com/css/css_navbar.asp */
 .nav-bar {
     list-style-type: none;
