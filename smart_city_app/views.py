@@ -6,11 +6,16 @@ from smart_city_app.queries import map_search
 from smart_city_app.queries import get_10_items
 from django.contrib.auth import login
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.contrib.auth.forms import UserCreationForm
 
 # Welcome/home page view
 def index(request):
+    
+    # u = User.objects.get(username='dev')
+    # u.set_password('dev')
+    # u.save()
+
     page_title = 'Smart City - Welcome Page'
     group_id = 0
     top_ten = {}
@@ -25,7 +30,7 @@ def index(request):
     if (request.user.is_authenticated()):
         groups = request.user.groups.all()
         if (len(groups) > 0):
-            group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(groups[0]))[0].id
+            group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(groups[0].name))[0].id
             top_ten = map_item.objects.raw(get_10_items.format(group_id))
 
     if (q):
@@ -63,6 +68,40 @@ def index(request):
         "latitude":latitude,
         "longitude":longitude,
         "request_type":request_type,
+    })
+
+def editor(request):
+    page_title = 'Smart City - editor'
+    group_id = 0
+
+    place_id = request.GET.get('place_id')
+    place = 0
+
+    if (place_id != 0):
+        place = map_item.objects.raw("SELECT * FROM smart_city_app_map_item WHERE map_item_id={}".format(place_id))
+
+    if (request.user.is_authenticated()):
+        groups = request.user.groups.all()
+        if (len(groups) > 0):
+            group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(groups[0]))[0].id
+
+    if (group_id == 1):
+        return render(request, "smart_city_app/editor.html",
+        {
+            # Pass variables into template
+            "page_title": page_title,
+            "place": place,
+        })
+    else:
+        return render(request, "smart_city_app/oops.html",{})
+
+def places(request):
+    page_title = 'Smart City - about'
+
+    return render(request, "smart_city_app/about.html",
+    {
+        # Pass variables into template
+        "page_title": page_title
     })
 
 def about(request):
