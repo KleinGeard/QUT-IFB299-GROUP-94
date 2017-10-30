@@ -27,6 +27,8 @@
             {% endif %}
         </ul>
         <h2>Places.</h2>
+        <a href="/editor?id=0"><input id="add" value="Add new place" type="button" name="add"/></a>
+        <hr>
         <table id="place_list">
             {% for result in results %}
                 <tr>
@@ -38,8 +40,8 @@
                     <td>{{result.map_item_email}}</td>
                     <td>{{result.map_item_type_id}}</td>
                     <td>{{result.map_item_phone}}</td>
-                    <td><a href="/editor?id={{result.map_item_id}}"><input id="edit" value="Edit" type="button" name="edit"></a></td>
-                    <td><input id="delete" value="Delete" type="button" name="delete"></td>
+                    <td><a href="/editor?id={{result.map_item_id}}"><input id="edit" value="Edit" type="button" name="edit"/></a></td>
+                    <td><input id="delete" value="Delete" type="button" name="delete"/></td>
                 </tr>
             {% endfor %}
         </table>
