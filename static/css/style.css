@@ -25,20 +25,6 @@ h1 {
     color: white;
 }
 
-.tile_small2 {
-    background-color: #333;
-    color: white;
-    height: 25px;
-    border-style: none;
-    font-family: sans-serif;
-    font-size: 18px;
-}
-
-.tile_small2:hover {
-    background-color: #111;
-    color: white;
-}
-
 /* some snippets from https://www.w3schools.com/css/css_navbar.asp */
 .nav-bar {
     list-style-type: none;
@@ -90,17 +76,17 @@ h1 {
 }
 
 /* https://www.w3schools.com/css/css_table.asp */
-table, td, th {    
+.tbl, .cell, .th {    
     border: 1px solid #ddd;
     text-align: left;
 }
 
-table {
+.tbl {
     border-collapse: collapse;
     width: 100%;
 }
 
-th, td {
+.th, .cell {
     padding: 15px;
 }
 

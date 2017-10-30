@@ -200,3 +200,12 @@ def register(request):
         "page_title": page_title,
         "form": form,
     })
+
+def profile(request):
+    page_title = "Smart City - Your profile"
+
+    return render(request, "smart_city_app/profile.html",
+    {
+        # Pass variables into template
+        "page_title": page_title,
+    })
