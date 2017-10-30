@@ -27,23 +27,19 @@
         </ul>
         <content>
             <br>
-            <table>
-                <tr><td><a href="/edit-profile"><input id="edit" name="edit" class="tile_small" type="button" value="Edit profile"/></a></td></tr>
-                <tr>
-                    <td>
-                        <img src="{% static 'profile.png' %}" style="border-style: solid;"/><br>
-                        <input type="button" value="Change Profile Picture" onclick="alert('Not yet implemented')" class="tile_small"/><br><br>
-                        Date joined: {{ user.date_joined }}
-                    </td>
-                    <td>
-                        Name: {{ user.first_name }} {{ user.last_name }}<br>
-                        Username: {{ user.username }}<br>
-                        Email: {{ user.email }}<br>
-                        <!--User type: {{ user. }}<br> -->
-                        Last time logged in: {{ user.last_login }}<br>
-                    </td>
-                </tr>
-            </table>
+            <form method="POST">
+                {% csrf_token %}
+                ID: {{ user.id }} <br>
+                First name: <input type="text" name="fname" id="fname" value="{{user.first_name}}"/><br>
+                Last name: <input type="text" name="lname" id="lname" value="{{user.last_name}}"/><br>
+                Username: <input type="text" name="username" id="username" value="{{user.username}}"/><br>
+                Email: <input type="email" name="email" id="email" value="{{user.email}}"/><br>
+                <span title="Businessmen, Students, tourists"> <!-- temporary until dropdown list is added -->
+                        Group: <input type="text" name="group" id="group" value="{{user_group}}"/><br>
+                </span>
+                <br>
+                <input class="tile_small" type="submit" name="submit" id="submit" value="Submit"/>
+            </form>
         </content>
     </body>
 </html>

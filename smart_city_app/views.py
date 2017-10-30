@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.db import connection
 from django.http import HttpResponse, HttpResponseRedirect
 from smart_city_app.models import map_item
-from smart_city_app.queries import map_search, get_10_items, update_map_items, insert_map_item
+from smart_city_app.queries import map_search, get_10_items, update_map_items, insert_map_item, update_user
 from django.contrib.auth import login
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group, User
@@ -202,10 +202,61 @@ def register(request):
     })
 
 def profile(request):
-    page_title = "Smart City - Your profile"
+    page_title = "Smart City - Your Profile"
 
     return render(request, "smart_city_app/profile.html",
     {
         # Pass variables into template
         "page_title": page_title,
     })
+
+def edit_profile(request):
+    page_title = 'Smart City - Edit Profile Info'
+    group_id = 0
+    place_id = request.GET.get('id')
+
+    name = ""
+    addr = ""
+    ind = ""
+    depart = ""
+    email = ""
+    phone = ""
+    group = "" 
+
+    place = 0
+    count = 0
+
+    if (place_id == None):
+        place_id = 0
+
+    if (int(place_id) > 0):
+        place = map_item.objects.raw("SELECT * FROM db.get_places WHERE map_item_id={}".format(place_id))
+        count = len(list(place))
+        place = list(place)[0]
+
+    if (request.method == "POST"):
+        first_name = request.POST.get('fname')
+        last_name = request.POST.get('lname')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        group = request.POST.get('group')  
+
+        auth_group_id = 0
+        if (group != None):
+            auth_group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(group))
+            auth_group_id = list(auth_group_id)[0].id
+        with connection.cursor() as cursor:
+            cursor.execute(update_user.format(first_name, last_name, username, email, int(request.user.id)))
+        return HttpResponseRedirect("/profile")
+
+    group_id = get_group_id(request, Group)
+
+    if (request.user.is_authenticated()):
+        return render(request, "smart_city_app/edit-profile.html",
+        {
+            # Pass variables into template
+            "page_title": page_title,
+            "user_group": request.user.groups.all()[0].name,
+        })
+    else:
+        return render(request, "smart_city_app/oops.html",{})

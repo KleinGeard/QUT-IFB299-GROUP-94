@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^editor/$', views.editor, name='editor'),
     url(r'^places/$', views.places, name='places'),
     url(r'^profile/$', views.profile, name='profile'),
+    url(r'^edit-profile/$', views.edit_profile, name='edit-profile'),
     url(r'^login/$', auth_views.login, {'template_name': 'smart_city_app/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'smart_city_app/logout.html'}, name='logout'),
     url(r'^register/$', views.register, name='register'),
