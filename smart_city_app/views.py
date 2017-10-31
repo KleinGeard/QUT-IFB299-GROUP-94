@@ -219,7 +219,8 @@ def profile(request):
     {
         # Pass variables into template
         "page_title": page_title,
-        "group_id": get_group_id(request, Group)
+        "group_id": get_group_id(request, Group),
+        "user_group": request.user.groups.all()[0].name
     })
 
 def edit_profile(request):
@@ -259,6 +260,12 @@ def edit_profile(request):
             auth_group_id = list(auth_group_id)[0].id
         with connection.cursor() as cursor:
             cursor.execute(update_user.format(first_name, last_name, username, email, int(request.user.id)))
+            if (group == "Administration" or group == "Students" or group == "Businessmen" or group == "tourists"):
+                cursor.execute("SELECT id FROM auth_user_groups WHERE user_id={}".format(request.user.id))
+                user_group_id = cursor.fetchall()[0]
+                cursor.execute("UPDATE auth_user_groups SET group_id={} WHERE id={};".format(auth_group_id, int(user_group_id[0])))
+                print(auth_group_id, user_group_id)
+
         return HttpResponseRedirect("/profile")
 
     group_id = get_group_id(request, Group)
