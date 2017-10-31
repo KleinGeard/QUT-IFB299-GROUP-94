@@ -114,10 +114,19 @@
                 </div>
                 {% endif %}
             {% else %}
-                {% if not user.is_authenticated %}
-                    <h1>Please select a city or <a class="hyperlinks" href="/login">login</a> to continue.</h1>
-                    <h1>Not registered? Register <a class="hyperlinks" href="/register">here.</a></h1>
-                {% endif %}
+                {% if request_type == "directions" or request_type == "search" %}
+                    <p>Error: City not selected</p>
+                {% endif %}  
+                {% if latitude != None and  longitude != none %}
+                    <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&q={{latitude}},{{longitude}}" allowfullscreen></iframe>
+                {% else %}
+                <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&q=-27.4698,153.0251" allowfullscreen></iframe>
+                {% endif %}     
+            {% endif %}
+        
+            {% if not user.is_authenticated %}
+                <h1>Please select a city or <a class="hyperlinks" href="/login">login</a> to continue.</h1>
+                <h1>Not registered? Register <a class="hyperlinks" href="/register">here.</a></h1>
             {% endif %}
         </content>
         
