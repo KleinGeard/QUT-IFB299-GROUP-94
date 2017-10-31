@@ -218,12 +218,20 @@ def register(request):
 def profile(request):
     page_title = "Smart City - Your Profile"
 
+    group = ""
+    groups = request.user.groups.all()
+    if (len(list(groups))):
+        group = groups[0].name
+    else:
+        group = "No group"
+
+
     return render(request, "smart_city_app/profile.html",
     {
         # Pass variables into template
         "page_title": page_title,
         "group_id": get_group_id(request, Group),
-        "user_group": request.user.groups.all()[0].name
+        "user_group": group
     })
 
 def edit_profile(request):
@@ -250,6 +258,13 @@ def edit_profile(request):
         count = len(list(place))
         place = list(place)[0]
 
+    user_group = ""
+    groups = request.user.groups.all()
+    if (len(list(groups))):
+        user_group = groups[0].name
+    else:
+        user_group = "No group"
+
     if (request.method == "POST"):
         first_name = request.POST.get('fname')
         last_name = request.POST.get('lname')
@@ -263,13 +278,17 @@ def edit_profile(request):
 
             if (len(list(auth_group_id))):
                 auth_group_id = list(auth_group_id)[0].id
-        with connection.cursor() as cursor:
-            cursor.execute(update_user.format(first_name, last_name, username, email, int(request.user.id)))
-            if (group.lower() == "students" or group.lower() == "businessmen" or group.lower() == "tourists"):
-                cursor.execute("SELECT id FROM auth_user_groups WHERE user_id={}".format(request.user.id))
-                user_group_id = cursor.fetchall()[0]
-                cursor.execute("UPDATE auth_user_groups SET group_id={} WHERE id={};".format(auth_group_id, int(user_group_id[0])))
-                print(auth_group_id, user_group_id)
+                with connection.cursor() as cursor:
+                    cursor.execute(update_user.format(first_name, last_name, username, email, int(request.user.id)))
+                    if (group.lower() == "students" or group.lower() == "businessmen" or group.lower() == "tourists"):
+                        if (len(list(groups))):
+                            cursor.execute("SELECT id FROM auth_user_groups WHERE user_id={}".format(request.user.id))
+                            user_group_id = cursor.fetchall()[0]
+                            cursor.execute("UPDATE auth_user_groups SET group_id={} WHERE id={};".format(auth_group_id, int(user_group_id[0])))
+                            print("updated")
+                        else:
+                            cursor.execute("INSERT INTO auth_user_groups (group_id, user_id) VALUES ({},{});".format(auth_group_id, request.user.id))
+                            print("inserted")
 
         return HttpResponseRedirect("/profile")
 
@@ -278,12 +297,19 @@ def edit_profile(request):
     with connection.cursor() as cursor:
         group_list = cursor.execute("SELECT * FROM auth_group")
 
+    user_group = ""
+    groups = request.user.groups.all()
+    if (len(list(groups))):
+        user_group = groups[0].name
+    else:
+        user_group = "No group"
+
     if (request.user.is_authenticated()):
         return render(request, "smart_city_app/edit-profile.html",
         {
             # Pass variables into template
             "page_title": page_title,
-            "user_group": request.user.groups.all()[0].name,
+            "user_group": user_group,
             "group_id": get_group_id(request, Group),
             "group_list": group_list
         })
