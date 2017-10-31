@@ -15,3 +15,5 @@ class map_item(models.Model):
 
     def __unicode__(self):
         return self.map_item_name
+
+    

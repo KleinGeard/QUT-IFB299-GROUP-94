@@ -11,27 +11,46 @@
     <body>
         <img src="{% static 'logo.png' %}"/>
         <ul class="nav-bar">
-            <li class="nav-link"><a href="/">Home</a></li>
-            <li class="nav-link"><a href="/about">About</a></li>
-            <li class="nav-link"><a href="/contact">Contact Us</a></li>
+                <li class="nav-link"><a href="/">Home</a></li>
+                <li class="nav-link"><a href="/about">About</a></li>
+                <li class="nav-link"><a href="/contact">Contact Us</a></li>
             {% if user.is_authenticated %}
-            <li class="nav-link" style="float:right"><a href="/logout">Logout</a></li>
+                <li class="nav-link" style="float:right"><a href="/logout">Logout</a></li>
             {% if group_id == 1 %}
                 <li class="nav-link"><a href="/places">Edit places</a></li>
                 <li class="nav-link"><a href="/administration" class="active">Administration</a></li>
             {% endif %}
-            <li class="nav-link" style="float:right"><a href="/profile">{{user.username}}</a></li>
-        {% else %}
-            <li class="nav-link" style="float:right"><a href="/login">Login</a></li>
-            <li class="nav-link" style="float:right"><a href="/register">Register</a></li>
-        {% endif %}
+                <li class="nav-link" style="float:right"><a href="/profile">{{user.username}}</a></li>
+            {% else %}
+                <li class="nav-link" style="float:right"><a href="/login">Login</a></li>
+                <li class="nav-link" style="float:right"><a href="/register">Register</a></li>
+            {% endif %}
         </ul>
         <content>
             <br>
-            <h1>Contact details</h1>
-            <p>
-                Admin Page
-            </p>
+            <h1>Administration</h1>
+            <table id="place_list" class="tbl">
+                <!-- Headings -->
+                <tr>
+                    <td class="cell"><b>ID</b></td>
+                    <td class="cell"><b>Username</b></td>
+                    <td class="cell"><b>First Name</b></td>
+                    <td class="cell"><b>Last Name</b></td>
+                    <td class="cell"><b>Email</b></td>
+                </tr>
+                <!-- Results -->
+                {% for result in results %}
+                    <tr>
+                        <td class="cell">{{result.id}}</td>
+                        <td class="cell">{{result.username}}</td>
+                        <td class="cell">{{result.first_name}}</td>
+                        <td class="cell">{{result.last_name}}</td>
+                        <td class="cell">{{result.email}}</td>
+                        <td class="cell"><a href="/editor?id={{result.map_item_id}}"><input style="background-color: rgb(209, 209, 0); color: rgb(0, 0, 0); height: 35px; border-style:none; border-radius: 8px; font-family: sans-serif; font-size: 18px;" id="edit" value="Edit" type="button" name="edit"/></a></td>
+                        <td class="cell"><input style="background-color: rgb(207, 38, 38); color: rgb(0, 0, 0); height: 35px; border-style:none; border-radius: 8px; font-family: sans-serif; font-size: 18px;" id="delete" value="Delete" type="button" name="delete"/></td>
+                    </tr>
+                {% endfor %}
+            </table>
         </content>
     </body>
 </html>

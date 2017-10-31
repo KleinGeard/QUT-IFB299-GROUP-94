@@ -182,11 +182,14 @@ def administration(request):
     page_title = 'Smart City - administration'
     group_id = get_group_id(request, Group)
 
+    results = User.objects.raw("SELECT * FROM auth_user;")
+
     return render(request, "smart_city_app/administration.html",
     {
         # Pass variables into template
         "page_title": page_title,
         "group_id": group_id,
+        "results": results,
     })
 
 def register(request):
