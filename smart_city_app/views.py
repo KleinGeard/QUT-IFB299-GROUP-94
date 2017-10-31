@@ -178,6 +178,17 @@ def contact(request):
         "group_id": group_id,
     })
 
+def administration(request):
+    page_title = 'Smart City - administration'
+    group_id = get_group_id(request, Group)
+
+    return render(request, "smart_city_app/administration.html",
+    {
+        # Pass variables into template
+        "page_title": page_title,
+        "group_id": group_id,
+    })
+
 def register(request):
     page_title = 'Smart City - Registration'
 
@@ -252,13 +263,17 @@ def edit_profile(request):
 
     group_id = get_group_id(request, Group)
 
+    with connection.cursor() as cursor:
+        group_list = cursor.execute("SELECT * FROM auth_group")
+
     if (request.user.is_authenticated()):
         return render(request, "smart_city_app/edit-profile.html",
         {
             # Pass variables into template
             "page_title": page_title,
             "user_group": request.user.groups.all()[0].name,
-            "group_id": get_group_id(request, Group)
+            "group_id": get_group_id(request, Group),
+            "group_list": group_list
         })
     else:
         return render(request, "smart_city_app/oops.html",{})
