@@ -19,6 +19,7 @@
                 <li class="nav-link" style="float:right"><a href="/logout">Logout</a></li>
                 {% if group_id == 1 %}
                     <li class="nav-link"><a href="/places">Edit places</a></li>
+                    <li class="nav-link"><a href="/administration">Administration</a></li>
                 {% endif %}
                 <li class="nav-link" style="float:right"><a href="/profile">{{user.username}}</a></li>
             {% else %}
@@ -59,8 +60,8 @@
                         navigator.geolocation.getCurrentPosition(showPosition);
                     } else { 
                         //default coordinates = Brisbane
-                        lat.value = "-27.4698";
-                        long.value = "153.0251";
+                        {{lat.value = "-27.4698";
+                        long.value = "153.0251";}}
                     }
                 }
                 
@@ -117,10 +118,10 @@
                 {% if request_type == "directions" or request_type == "search" %}
                     <p>Error: City not selected</p>
                 {% endif %}  
-                {% if latitude != None and  longitude != none %}
+                {% if latitude != None and longitude != None %}
                     <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&q={{latitude}},{{longitude}}" allowfullscreen></iframe>
                 {% else %}
-                <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&q=-27.4698,153.0251" allowfullscreen></iframe>
+                    <iframe name="iframe" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M&q=-27.4698,153.0251" allowfullscreen></iframe>
                 {% endif %}     
             {% endif %}
         
