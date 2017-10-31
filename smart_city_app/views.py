@@ -208,6 +208,7 @@ def profile(request):
     {
         # Pass variables into template
         "page_title": page_title,
+        "group_id": get_group_id(request, Group)
     })
 
 def edit_profile(request):
@@ -257,6 +258,7 @@ def edit_profile(request):
             # Pass variables into template
             "page_title": page_title,
             "user_group": request.user.groups.all()[0].name,
+            "group_id": get_group_id(request, Group)
         })
     else:
         return render(request, "smart_city_app/oops.html",{})
