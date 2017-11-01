@@ -254,26 +254,21 @@ def profile(request):
     else:
         group = "No group"
 
-
-    return render(request, "smart_city_app/profile.html",
-    {
-        # Pass variables into template
-        "page_title": page_title,
-        "group_id": get_group_id(request, Group),
-        "user_group": group
-    })
+    if (request.user.is_authenticated()):
+        return render(request, "smart_city_app/profile.html",
+        {
+            # Pass variables into template
+            "page_title": page_title,
+            "group_id": get_group_id(request, Group),
+            "user_group": group
+        })
+    else:
+        return render(request, "smart_city_app/oops.html",{})
 
 def edit_profile(request):
     page_title = 'Smart City - Edit Profile Info'
     group_id = 0
     place_id = request.GET.get('id')
-
-    name = ""
-    addr = ""
-    ind = ""
-    depart = ""
-    email = ""
-    phone = ""
     group = "" 
 
     place = 0
