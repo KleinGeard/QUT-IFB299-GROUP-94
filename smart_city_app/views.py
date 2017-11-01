@@ -88,25 +88,43 @@ def profile_editor(request):
     if (u_id == None):
         u_id = 0
 
+    group = ""
+
     if (int(u_id) > 0):
         u = User.objects.raw("SELECT * FROM auth_user WHERE id={};".format(u_id))
         count = len(list(u))
         u = list(u)[0]
-
-    group = ""
-    user = User.objects.get(id = u_id)
-    groups = user.groups.all()
-    if (len(list(groups))):
-        group = groups[0].name
-    else:
-        group = "No group"
+        user = User.objects.get(id = u_id)
+        groups = user.groups.all()
+        if (len(list(groups))):
+            group = groups[0].name
+        else:
+            group = "No group"
 
     if (request.method == "POST"):
         username = request.POST.get('username')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email = request.POST.get('email') 
+        group = request.POST.get('account_type')
         #update database
+        if (group != None):
+            auth_group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(group))
+            if (len(list(auth_group_id))):
+                auth_group_id = list(auth_group_id)[0].id
+                with connection.cursor() as cursor:
+                    cursor.execute(update_user.format(first_name, last_name, username, email, u_id))
+                    if (group.lower() == "students" or group.lower() == "businessmen" or group.lower() == "tourists"):
+                        if (len(list(groups))):
+                            cursor.execute("SELECT id FROM auth_user_groups WHERE user_id={}".format(u_id))
+                            user_group_id = cursor.fetchall()[0]
+                            cursor.execute("UPDATE auth_user_groups SET group_id={} WHERE id={};".format(auth_group_id, int(user_group_id[0])))
+                            print("updated")
+                        else:
+                            cursor.execute("INSERT INTO auth_user_groups (group_id, user_id) VALUES ({},{});".format(auth_group_id, u_id))
+                            print("inserted")
+
+        return HttpResponseRedirect("/administration")
 
     group_id = get_group_id(request, Group)
 
