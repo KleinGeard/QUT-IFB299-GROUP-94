@@ -120,7 +120,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$36000$zF2A9ZPIPMiz$ZepOuY+c/BvYGtQQ9Eims3qoXPrhA047F8YxHPg/8Yo=','2017-09-04 05:37:40.407260',1,'admin','','','admin@smartcity.com',1,1,'2017-09-01 10:54:16.000000'),(2,'pbkdf2_sha256$36000$ZInmtS8GJ9za$hUOl38smRDfgMw0YS7zCwBBbb1QlJBjL3TPLBpTeYZc=',NULL,0,'businessman1','','','',0,1,'2017-09-01 10:56:59.000000'),(3,'pbkdf2_sha256$36000$Ijy4ZidNtJoe$AMyKzwQp1L0JbsdZQ2nvRkBYNQ4AXmGtv36NY03TFZo=',NULL,0,'student1','','','',0,1,'2017-09-01 10:57:22.000000'),(4,'pbkdf2_sha256$36000$dN0B7tI6BUsw$sloicUZiR1XwmzpQzS99iYxk2Zt35UleYr7wESTkUUE=',NULL,0,'tourist1','','','',0,1,'2017-09-01 10:57:55.000000'),(5,'pbkdf2_sha256$36000$rbGYtjnODQOT$zwycF7XNO5nUWd85xfyF7UMZ6NmhZbW4f/jD2IXXiaw=','2017-10-30 01:47:58.750336',0,'Thisisatest123','','','',1,1,'2017-10-02 10:26:14.566484'),(6,'pbkdf2_sha256$36000$TSvlGMIawXUP$5FoPPK9/GsmrguSzYHP7ZdI+T+jm6KsvGsyigq9ynAM=','2017-10-04 14:03:51.707597',0,'Thisisatest1234','','','',0,1,'2017-10-02 10:27:13.107537'),(7,'pbkdf2_sha256$36000$chGcu0TM0OP8$Yo7jJoa/7yb0FYvEOHuqJtfZR/PptlRqOjSc147+wsQ=','2017-10-02 12:30:32.109372',1,'danielfield','','','',1,1,'2017-10-02 12:28:27.529412'),(8,'pbkdf2_sha256$36000$9hBcttk3VQu6$Vq3DMOVc86R7RhY+PTkh0s6rrzsEvC2dAfR3GcdHKoM=','2017-10-02 12:41:40.907011',0,'Testuser123','','','',0,1,'2017-10-02 12:41:40.552864'),(9,'pbkdf2_sha256$36000$AAV3dyjNSNrj$YCwOn6syWNRnZanXFE1rNg7kcCt8FjhaMHsJVEJEvys=','2017-10-04 06:32:02.505491',0,'Onetwothree','','','',0,1,'2017-10-04 06:32:02.061048'),(10,'pbkdf2_sha256$36000$t5p6NejcWQd9$CKKy0anUgYT9H8L3V6n6AZDufX5RiwG20WEtbq6rIWg=','2017-10-04 12:22:32.958853',0,'Just_a_test1','','','',0,1,'2017-10-04 12:22:32.348757'),(11,'pbkdf2_sha256$36000$tIvfsMzSDTBd$nbWXUodvn6LqpGUHHYtsO9KZMGdzVZjQKEnKude9a+Q=','2017-10-04 12:25:31.751190',0,'adfcsdfdff','','','',0,1,'2017-10-04 12:25:31.300541'),(12,'pbkdf2_sha256$36000$w3phUkezaWsG$yiI1RbjB1O8XeI+qNmhRNTkkvetEx3UOKEk9MAvnk2w=','2017-10-30 01:31:46.921987',1,'Daniel','','','no@no.com',1,1,'2017-10-30 01:31:38.981442'),(13,'pbkdf2_sha256$36000$w74vDFjuqYJM$wzDruaELP4cNdGCAuhhjmDj2XAvQeNkoB3GoPZRUT+8=','2017-10-30 14:13:19.775465',1,'dev','','','',1,1,'2017-10-30 01:53:42.919770'),(14,'pbkdf2_sha256$36000$tPdHMXNPOBdJ$DZJBkRITFWWuuuxPeY4GR/O6wQcQHzZWI1vYAVyG6PY=','2017-10-30 14:11:51.222885',0,'Thisisatest12345','','','',0,1,'2017-10-30 14:11:50.998581');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$36000$zF2A9ZPIPMiz$ZepOuY+c/BvYGtQQ9Eims3qoXPrhA047F8YxHPg/8Yo=','2017-09-04 05:37:40.407260',1,'admin','','','admin@smartcity.com',1,1,'2017-09-01 10:54:16.000000'),(2,'pbkdf2_sha256$36000$ZInmtS8GJ9za$hUOl38smRDfgMw0YS7zCwBBbb1QlJBjL3TPLBpTeYZc=',NULL,0,'businessman1','','','',0,1,'2017-09-01 10:56:59.000000'),(3,'pbkdf2_sha256$36000$Ijy4ZidNtJoe$AMyKzwQp1L0JbsdZQ2nvRkBYNQ4AXmGtv36NY03TFZo=',NULL,0,'student1','','','',0,1,'2017-09-01 10:57:22.000000'),(4,'pbkdf2_sha256$36000$dN0B7tI6BUsw$sloicUZiR1XwmzpQzS99iYxk2Zt35UleYr7wESTkUUE=',NULL,0,'tourist1','','','',0,1,'2017-09-01 10:57:55.000000'),(5,'pbkdf2_sha256$36000$rbGYtjnODQOT$zwycF7XNO5nUWd85xfyF7UMZ6NmhZbW4f/jD2IXXiaw=','2017-10-30 01:47:58.750336',0,'Thisisatest123','','','',1,1,'2017-10-02 10:26:14.566484'),(6,'pbkdf2_sha256$36000$TSvlGMIawXUP$5FoPPK9/GsmrguSzYHP7ZdI+T+jm6KsvGsyigq9ynAM=','2017-10-04 14:03:51.707597',0,'Thisisatest1234','','','',0,1,'2017-10-02 10:27:13.107537'),(7,'pbkdf2_sha256$36000$chGcu0TM0OP8$Yo7jJoa/7yb0FYvEOHuqJtfZR/PptlRqOjSc147+wsQ=','2017-10-02 12:30:32.109372',1,'danielfield','','','',1,1,'2017-10-02 12:28:27.529412'),(8,'pbkdf2_sha256$36000$9hBcttk3VQu6$Vq3DMOVc86R7RhY+PTkh0s6rrzsEvC2dAfR3GcdHKoM=','2017-10-02 12:41:40.907011',0,'Testuser123','','','',0,1,'2017-10-02 12:41:40.552864'),(9,'pbkdf2_sha256$36000$AAV3dyjNSNrj$YCwOn6syWNRnZanXFE1rNg7kcCt8FjhaMHsJVEJEvys=','2017-10-04 06:32:02.505491',0,'Onetwothree','','','',0,1,'2017-10-04 06:32:02.061048'),(10,'pbkdf2_sha256$36000$t5p6NejcWQd9$CKKy0anUgYT9H8L3V6n6AZDufX5RiwG20WEtbq6rIWg=','2017-10-04 12:22:32.958853',0,'Just_a_test1','','','',0,1,'2017-10-04 12:22:32.348757'),(11,'pbkdf2_sha256$36000$tIvfsMzSDTBd$nbWXUodvn6LqpGUHHYtsO9KZMGdzVZjQKEnKude9a+Q=','2017-10-04 12:25:31.751190',0,'adfcsdfdff','','','',0,1,'2017-10-04 12:25:31.300541'),(12,'pbkdf2_sha256$36000$w3phUkezaWsG$yiI1RbjB1O8XeI+qNmhRNTkkvetEx3UOKEk9MAvnk2w=','2017-10-30 01:31:46.921987',1,'Daniel','','','no@no.com',1,1,'2017-10-30 01:31:38.981442'),(13,'pbkdf2_sha256$36000$w74vDFjuqYJM$wzDruaELP4cNdGCAuhhjmDj2XAvQeNkoB3GoPZRUT+8=','2017-11-01 00:24:57.788912',1,'dev','Daniel','Field','test@test.com',1,1,'2017-10-30 01:53:42.919770'),(14,'pbkdf2_sha256$36000$tPdHMXNPOBdJ$DZJBkRITFWWuuuxPeY4GR/O6wQcQHzZWI1vYAVyG6PY=','2017-10-30 14:11:51.222885',0,'Thisisatest12345','','','',0,1,'2017-10-30 14:11:50.998581'),(15,'pbkdf2_sha256$36000$CMtT61jL8BKv$3xRc02A/t8Td6poB/pyUy1iX0I4M4mkoLkAWFp3B5Ps=','2017-10-31 04:44:23.398377',0,'testuser1','','','',0,1,'2017-10-31 04:44:23.155126'),(16,'pbkdf2_sha256$36000$ckwTqdF1EOyv$lRiAbliWg8/6wbrAx1+6hMin+MWHSbck+PfTmAJFfRM=','2017-10-31 07:49:01.714295',0,'new','Bill','Josephs','new@gmail.com',0,1,'2017-10-31 07:49:01.439859'),(17,'pbkdf2_sha256$36000$S7jfHN4I8S3T$z9qn50csEPGZ0MQLJOI2gMoFNkGEdjw0yulTmKScB8c=','2017-10-31 08:15:08.208414',0,'new1','test','test2','email@email.com',0,1,'2017-10-31 08:15:07.867965');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +149,7 @@ CREATE TABLE `auth_user_groups` (
   KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
   CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +158,7 @@ CREATE TABLE `auth_user_groups` (
 
 LOCK TABLES `auth_user_groups` WRITE;
 /*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
-INSERT INTO `auth_user_groups` VALUES (1,1,1),(2,2,2),(3,5,1),(4,6,3),(5,7,1),(6,13,1);
+INSERT INTO `auth_user_groups` VALUES (1,1,4),(2,2,2),(3,5,1),(4,6,3),(5,7,1),(6,13,1),(7,15,3),(8,16,3),(9,17,4);
 /*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,7 +294,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('8a79q674hhh2lb13g1tbif0hd6wqp7dy','NmZmMzJjOTYxMTk1MDRkNWFhYWI5NzNlNzBmMDg2YTU0NDAwM2FjNjp7InF1ZXJ5IjoicSJ9','2017-10-16 10:26:14.925788'),('a49mm5ya3hti4333upo90mnn6t67fe2g','ZTFiNTYyNTBlZTEyMDQxYzA2YWNiM2Y1NjMzYWZmNTQ1MzRiMDUzMTp7Il9hdXRoX3VzZXJfaWQiOiIxMyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiOGI1MDAxYjcxY2RhMWExMmI4MDM0ZTAyZTQ5NDFlODE4NjUzNGI1NSIsInF1ZXJ5IjoicSJ9','2017-11-13 14:27:55.416548'),('b162wese3nc18ikmyhlqhjb8iqnt4152','OGYzNmJiNTY2NTViMzQ2YTFkODQ4ZWFjNWUwYzMzYzBhOGI0Y2YxNzp7InF1ZXJ5IjoidW5zdyJ9','2017-11-12 18:00:21.409360'),('cxi5l2nuhioa6j9vxsxbii7atxkaym7z','MmM2MTc2ZjdhMzYxMDAzYjlhNTY1NTI3NzA2OTk5OGJjOGNkOWY4OTp7Il9hdXRoX3VzZXJfaWQiOiIxMyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZGU5ZjA1ZGEwYjc1ZmFjNWU4NzRiOWM5YTE5ZjRkYWNmN2Y2ZjAyYyJ9','2017-11-13 01:54:41.278384'),('npc6h4dn2fug6ktv3xrhxqpwojodk48n','YWE1ZjUzYjNiNGVlOGY2NzE1OWRiMmEyZTMwNzRlYzE0OGU2MWIzMjp7InF1ZXJ5IjoicXV0In0=','2017-10-20 11:40:18.005085'),('sh1wmdcm3v7gi7nvgcoa8ybauz23f6nw','MDFhNzNiY2JkZGVmMDM1OWFiNjk2NTVlMjc1YWEyZTA5Y2VhZmM5MTp7InF1ZXJ5IjoidW5pdmVyc2l0eSIsIl9hdXRoX3VzZXJfaWQiOiI2IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI4OTU3ZTJiZTZkMjc4MWZhYTY5ZDRlY2I3MzhkMDJkMzdhYWQ1MDk0In0=','2017-10-18 15:04:35.740943'),('slg628facvmcf2tyr781vgixb3diubkf','NmZmMzJjOTYxMTk1MDRkNWFhYWI5NzNlNzBmMDg2YTU0NDAwM2FjNjp7InF1ZXJ5IjoicSJ9','2017-09-18 06:57:34.633722');
+INSERT INTO `django_session` VALUES ('3x2nyy3tkjgsh6jys4p6nahdbbw0m0je','MmMwOTgyMTRiOThmMjhkYzFjZjU2MGY2MTc0MTM5MDQxNWQ5MTAyZjp7Il9hdXRoX3VzZXJfaWQiOiIxMyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiOGI1MDAxYjcxY2RhMWExMmI4MDM0ZTAyZTQ5NDFlODE4NjUzNGI1NSJ9','2017-11-14 02:13:58.480673'),('8a79q674hhh2lb13g1tbif0hd6wqp7dy','NmZmMzJjOTYxMTk1MDRkNWFhYWI5NzNlNzBmMDg2YTU0NDAwM2FjNjp7InF1ZXJ5IjoicSJ9','2017-10-16 10:26:14.925788'),('b162wese3nc18ikmyhlqhjb8iqnt4152','OGYzNmJiNTY2NTViMzQ2YTFkODQ4ZWFjNWUwYzMzYzBhOGI0Y2YxNzp7InF1ZXJ5IjoidW5zdyJ9','2017-11-12 18:00:21.409360'),('cxi5l2nuhioa6j9vxsxbii7atxkaym7z','MmM2MTc2ZjdhMzYxMDAzYjlhNTY1NTI3NzA2OTk5OGJjOGNkOWY4OTp7Il9hdXRoX3VzZXJfaWQiOiIxMyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZGU5ZjA1ZGEwYjc1ZmFjNWU4NzRiOWM5YTE5ZjRkYWNmN2Y2ZjAyYyJ9','2017-11-13 01:54:41.278384'),('hupot3gqi1pxcokf6pqpkkrswks8jna8','OWJiOGMwMTk2ODAzODM4NmRjZjg3MmExY2JiZGU5YTIxNmQyY2RiODp7InF1ZXJ5IjoicSIsIl9hdXRoX3VzZXJfaWQiOiIxMyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiOGI1MDAxYjcxY2RhMWExMmI4MDM0ZTAyZTQ5NDFlODE4NjUzNGI1NSJ9','2017-11-15 02:13:34.389582'),('in5i0hswfgct2uy0xtogybbfvfd2qqq3','NmM5NDgwNjU0Mzc0ZGM4ZWMxNDYwYTYwYzgyMTgxZDg4OWZkZjQ5Yjp7InF1ZXJ5IjoiYW51In0=','2017-11-14 01:40:43.596370'),('npc6h4dn2fug6ktv3xrhxqpwojodk48n','YWE1ZjUzYjNiNGVlOGY2NzE1OWRiMmEyZTMwNzRlYzE0OGU2MWIzMjp7InF1ZXJ5IjoicXV0In0=','2017-10-20 11:40:18.005085'),('sh1wmdcm3v7gi7nvgcoa8ybauz23f6nw','MDFhNzNiY2JkZGVmMDM1OWFiNjk2NTVlMjc1YWEyZTA5Y2VhZmM5MTp7InF1ZXJ5IjoidW5pdmVyc2l0eSIsIl9hdXRoX3VzZXJfaWQiOiI2IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI4OTU3ZTJiZTZkMjc4MWZhYTY5ZDRlY2I3MzhkMDJkMzdhYWQ1MDk0In0=','2017-10-18 15:04:35.740943'),('slg628facvmcf2tyr781vgixb3diubkf','NmZmMzJjOTYxMTk1MDRkNWFhYWI5NzNlNzBmMDg2YTU0NDAwM2FjNjp7InF1ZXJ5IjoicSJ9','2017-09-18 06:57:34.633722');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,7 +334,7 @@ CREATE TABLE `smart_city_app_map_item` (
   `map_item_type_id` int(11) NOT NULL,
   `map_item_phone` varchar(32) NOT NULL,
   PRIMARY KEY (`map_item_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,7 +343,7 @@ CREATE TABLE `smart_city_app_map_item` (
 
 LOCK TABLES `smart_city_app_map_item` WRITE;
 /*!40000 ALTER TABLE `smart_city_app_map_item` DISABLE KEYS */;
-INSERT INTO `smart_city_app_map_item` VALUES (1,'UQ','Brisbane','sdfnksjfn','jnkjnjkgbkhb','cdsgsfdlmk@a.com',3,'618752455'),(2,'made up place','123453csdcrwsvioskfmbrisbane','haha','no','k@m.s',3,'123'),(3,'QUT','2 George St Brisbane, QLD 4000','Education','','askqut@qut.edu.au',3,'143954648'),(4,'test place','test addr','boring stuff','idk','idk@idk.idklol',2,'1230i495u4252q31cwerwfw'),(5,'a','1 pretend rd, Brisbane','a','1','a@a.a',4,'1');
+INSERT INTO `smart_city_app_map_item` VALUES (1,'The University of Queensland (UQ)','The University of Queensland St Lucia Brisbane Qld 4072 Australia','Entertainment?','All','askus@library.uq.edu.au',3,'+617 3365 1111'),(2,'made up place','brisbane lol','haha','no','k@m.s',3,'123'),(3,'Queensland University of Technology (QUT)','2 George St Brisbane, QLD 4000','Education','All','askqut@qut.edu.au',3,'+ 61 7 3138 2000'),(4,'test place','11 fake rd, Sydney','boring stuff','idk','idk@idk.idklol',2,'1230i495u4252q31cwerwfw'),(5,'a','1 pretend rd, Brisbane','a','1','a@a.a',4,'1'),(6,'City Botanic Gardens','147 Alice St, Brisbane City QLD 4000','Horticulture','All','',4,'(07) 3403 8888');
 /*!40000 ALTER TABLE `smart_city_app_map_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -382,4 +382,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-31  0:34:09
+-- Dump completed on 2017-11-01 12:17:02
