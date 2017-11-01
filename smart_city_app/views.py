@@ -118,7 +118,7 @@ def profile_editor(request):
                 auth_group_id = list(auth_group_id)[0].id
                 with connection.cursor() as cursor:
                     cursor.execute(update_user.format(first_name, last_name, username, email, u_id))
-                    if (group.lower() == "students" or group.lower() == "businessmen" or group.lower() == "tourists"):
+                    if (group.lower() == "administration" or group.lower() == "students" or group.lower() == "businessmen" or group.lower() == "tourists"):
                         if (len(list(groups))):
                             cursor.execute("SELECT id FROM auth_user_groups WHERE user_id={}".format(u_id))
                             user_group_id = cursor.fetchall()[0]
