@@ -74,7 +74,6 @@ def index(request):
 def profile_editor(request):
     page_title = 'Smart City - Profile Editor'
 
-    group_id = 0
     u_id = request.GET.get('id') #from URL pattern
 
     username = ""
@@ -93,10 +92,12 @@ def profile_editor(request):
         count = len(list(u))
         u = list(u)[0]
 
+    group_id = get_group_id(request, Group)
 
     return render(request, "smart_city_app/profile_editor.html",
     {
         "page_title": page_title,
+        "group_id": group_id,
         "u": u,
     })
 
@@ -209,17 +210,20 @@ def contact(request):
 
 def administration(request):
     page_title = 'Smart City - administration'
-    group_id = get_group_id(request, Group)
 
     results = User.objects.raw("SELECT * FROM auth_user;")
 
-    return render(request, "smart_city_app/administration.html",
-    {
-        # Pass variables into template
-        "page_title": page_title,
-        "group_id": group_id,
-        "results": results,
-    })
+    group_id = get_group_id(request, Group)
+    if (group_id == 1):
+        return render(request, "smart_city_app/administration.html",
+        {
+            # Pass variables into template
+            "page_title": page_title,
+            "group_id": group_id,
+            "results": results,
+        })
+    else:
+        return render(request, "smart_city_app/oops.html",{})
 
 def register(request):
     page_title = 'Smart City - Registration'
