@@ -126,12 +126,12 @@ def profile_editor(request):
                             print("updated")
                         else:
                             cursor.execute(insert_user.format(username, password, first_name, last_name, email))
-                            sleep(0.5)
+                            sleep(2.0)
                             relevant_user = User.objects.raw("SELECT * FROM auth_user WHERE username = '{}';".format(username))
                             sleep(0.5)
-                            relevant_group_table = Group.objects.raw("SELECT * FROM auth_group WHERE user_id = {};".format(list(relevant_user)[0].id))
-                            #sleep(2.0)
-                            #cursor.execute("INSERT INTO auth_user_groups (group_id, user_id) VALUES ({},{});".format(list(relevant_group_table)[0].group_id, list(relevant_user)[0].id))
+                            relevant_group_table = Group.objects.raw("SELECT * FROM auth_group  WHERE name = '{}';".format(group))
+                            sleep(0.5)
+                            cursor.execute("INSERT INTO auth_user_groups (group_id, user_id) VALUES ({},{});".format(list(relevant_group_table)[0].id, list(relevant_user)[0].id))
                             print("inserted")
 
         return HttpResponseRedirect("/administration")
