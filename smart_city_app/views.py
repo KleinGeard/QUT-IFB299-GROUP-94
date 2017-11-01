@@ -92,14 +92,24 @@ def profile_editor(request):
         count = len(list(u))
         u = list(u)[0]
 
+    if (request.method == "POST"):
+        username = request.POST.get('username')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email') 
+        #update database
+
     group_id = get_group_id(request, Group)
 
-    return render(request, "smart_city_app/profile_editor.html",
-    {
-        "page_title": page_title,
-        "group_id": group_id,
-        "u": u,
-    })
+    if (group_id == 1):
+        return render(request, "smart_city_app/profile_editor.html",
+        {
+            "page_title": page_title,
+            "group_id": group_id,
+            "u": u,
+        })
+    else:
+        return render(request, "smart_city_app/oops.html",{})
 
 def editor(request):
     page_title = 'Smart City - Editor'
