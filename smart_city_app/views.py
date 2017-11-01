@@ -3,12 +3,13 @@ from django.shortcuts import redirect
 from django.db import connection
 from django.http import HttpResponse, HttpResponseRedirect
 from smart_city_app.models import map_item
-from smart_city_app.queries import map_search, get_10_items, update_map_items, insert_map_item, update_user
+from smart_city_app.queries import map_search, get_10_items, update_map_items, insert_map_item, update_user, insert_user
 from django.contrib.auth import login
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.forms import UserCreationForm
 from smart_city_app.functions import get_group_id
+from time import sleep
 
 # Welcome/home page view
 def index(request):
@@ -81,6 +82,7 @@ def profile_editor(request):
     last_name = ""
     email = ""
     account_type = ""
+    password = ""
 
     u = 0
     count = 0
@@ -89,6 +91,7 @@ def profile_editor(request):
         u_id = 0
 
     group = ""
+    groups = ""
 
     if (int(u_id) > 0):
         u = User.objects.raw("SELECT * FROM auth_user WHERE id={};".format(u_id))
@@ -105,8 +108,9 @@ def profile_editor(request):
         username = request.POST.get('username')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        email = request.POST.get('email') 
+        email = request.POST.get('email')
         group = request.POST.get('account_type')
+        password = request.POST.get('password')
         #update database
         if (group != None):
             auth_group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(group))
@@ -121,7 +125,13 @@ def profile_editor(request):
                             cursor.execute("UPDATE auth_user_groups SET group_id={} WHERE id={};".format(auth_group_id, int(user_group_id[0])))
                             print("updated")
                         else:
-                            cursor.execute("INSERT INTO auth_user_groups (group_id, user_id) VALUES ({},{});".format(auth_group_id, u_id))
+                            cursor.execute(insert_user.format(username, password, first_name, last_name, email))
+                            sleep(0.5)
+                            relevant_user = User.objects.raw("SELECT * FROM auth_user WHERE username = '{}';".format(username))
+                            sleep(0.5)
+                            relevant_group_table = Group.objects.raw("SELECT * FROM auth_group WHERE user_id = {};".format(list(relevant_user)[0].id))
+                            #sleep(2.0)
+                            #cursor.execute("INSERT INTO auth_user_groups (group_id, user_id) VALUES ({},{});".format(list(relevant_group_table)[0].group_id, list(relevant_user)[0].id))
                             print("inserted")
 
         return HttpResponseRedirect("/administration")

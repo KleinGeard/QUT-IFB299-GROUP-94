@@ -33,14 +33,17 @@
         {% endif %}
         <form method="POST">
             {% csrf_token %}
-
+            {% if u.username != null %}
             ID: {{ user_id }} <br>
+            {% endif %}
             Username: <input type="text" name="username" id="addr" value="{{u.username}}"/><br>
-            First Name: <input type="text" name="first_name" id="ind" value="{{u.first_name}}"/><br>
-            Last Name: <input type="text" name="last_name" id="depart" value="{{u.last_name}}"/><br>
+            {% if u.username == null %}
+                Password: <input type="text" name="password" id="password" value=""/><br>
+            {% endif %}
+            First Name: <input type="text" name="first_name" id="first_name" value="{{u.first_name}}"/><br>
+            Last Name: <input type="text" name="last_name" id="last_name" value="{{u.last_name}}"/><br>
             Email: <input type="email" name="email" id="email" value="{{u.email}}"/><br>
-            Account Type: <input type="account_type" name="account_type" id="account_type" value="{{user_group}}"/><br>
-
+            Account Type: <input type="text" name="account_type" id="account_type" value="{{user_group}}"/><br> 
             <br>
             <input class="tile_small" type="submit" name="submit" id="submit" value="Submit"/>
         </form>
