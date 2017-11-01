@@ -80,6 +80,7 @@ def profile_editor(request):
     first_name = ""
     last_name = ""
     email = ""
+    account_type = ""
 
     u = 0
     count = 0
@@ -91,6 +92,14 @@ def profile_editor(request):
         u = User.objects.raw("SELECT * FROM auth_user WHERE id={};".format(u_id))
         count = len(list(u))
         u = list(u)[0]
+
+    group = ""
+    user = User.objects.get(id = u_id)
+    groups = user.groups.all()
+    if (len(list(groups))):
+        group = groups[0].name
+    else:
+        group = "No group"
 
     if (request.method == "POST"):
         username = request.POST.get('username')
@@ -107,6 +116,7 @@ def profile_editor(request):
             "page_title": page_title,
             "group_id": group_id,
             "u": u,
+            "user_group": group,
         })
     else:
         return render(request, "smart_city_app/oops.html",{})
