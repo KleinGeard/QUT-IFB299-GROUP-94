@@ -97,9 +97,18 @@
                         <p>No results found.</p>
                     {% endif %} 
                     {% for result in results %}
-                        <a style="text-decoration: none" id="btnRes{{forloop.counter0}}" class="tile_medium" target="iframe" href="https://www.google.com/maps/embed/v1/search?q={{result.map_item_name}}+{{location}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M">
-                            <input id="btnRes{{forloop.counter0}}" class="tile_medium" type="button" value="{{result.map_item_name}}" name="result"/>
-                        </a>
+                        <div style="background-color: rgb(194, 255, 185);width:200px;">
+                            <a style="text-decoration: none" id="btnRes{{forloop.counter0}}" class="tile_medium" target="iframe" href="https://www.google.com/maps/embed/v1/search?q={{result.map_item_name}}+{{location}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M">
+                                <input id="btnRes{{forloop.counter0}}" class="tile_medium" type="button" value="{{result.map_item_name}}" name="result"/>
+                            </a>
+                            <br>
+                            Address: {{result.map_item_address}}<br>
+                            Phone: {{result.map_item_phone}}<br>
+                            Email: {{result.map_item_email}}<br>
+                            Industry: {{result.map_item_industry_type}}<br>
+                            Department: {{result.map_item_department}}<br>
+                        </div>
+                        <br>
                     {% endfor %}
                 </div>
                 </div>
@@ -108,9 +117,18 @@
                 <div>
                     <p>Check out some of these places below, which relate to your interests: </p>
                     {% for result in top_ten %}
-                        <a style="text-decoration: none" id="btnRes{{forloop.counter0}}" class="tile_medium" target="iframe" href="https://www.google.com/maps/embed/v1/search?q={{result.map_item_name}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M">
-                            <input id="btnTopTenRes{{forloop.counter0}}" class="tile_medium" type="button" value="{{result.map_item_name}}" name="toptenresult"/>
-                        </a>
+                        <div style="background-color: rgb(194, 255, 185);width:200px;">
+                            <a style="text-decoration: none" id="btnRes{{forloop.counter0}}" class="tile_medium" target="iframe" href="https://www.google.com/maps/embed/v1/search?q={{result.map_item_name}},+Australia&key=AIzaSyAbCAjmiNzLIg3mBgjxPWwPZe0NkbvCc_M">
+                                <input id="btnTopTenRes{{forloop.counter0}}" class="tile_medium" type="button" value="{{result.map_item_name}}" name="toptenresult"/>
+                            </a>
+                            <br>
+                            Address: {{result.map_item_address}}<br>
+                            Phone: {{result.map_item_phone}}<br>
+                            Email: {{result.map_item_email}}<br>
+                            Industry: {{result.map_item_industry_type}}<br>
+                            Department: {{result.map_item_department}}<br>
+                        </div>
+                        <br>
                     {% endfor %}
                 </div>
                 {% endif %}
