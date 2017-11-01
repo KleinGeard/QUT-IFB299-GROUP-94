@@ -71,6 +71,35 @@ def index(request):
         "request_type":request_type,
     })
 
+def profile_editor(request):
+    page_title = 'Smart City - Profile Editor'
+
+    group_id = 0
+    u_id = request.GET.get('id') #from URL pattern
+
+    username = ""
+    first_name = ""
+    last_name = ""
+    email = ""
+
+    u = 0
+    count = 0
+
+    if (u_id == None):
+        u_id = 0
+
+    if (int(u_id) > 0):
+        u = User.objects.raw("SELECT * FROM auth_user WHERE id={};".format(u_id))
+        count = len(list(u))
+        u = list(u)[0]
+
+
+    return render(request, "smart_city_app/profile_editor.html",
+    {
+        "page_title": page_title,
+        "u": u,
+    })
+
 def editor(request):
     page_title = 'Smart City - Editor'
     group_id = 0
@@ -91,7 +120,7 @@ def editor(request):
         place_id = 0
 
     if (int(place_id) > 0):
-        place = map_item.objects.raw("SELECT * FROM db.get_places WHERE map_item_id={}".format(place_id))
+        place = map_item.objects.raw("SELECT * FROM db.get_places WHERE map_item_id={};".format(place_id))
         count = len(list(place))
         place = list(place)[0]
 

@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'template_name': 'smart_city_app/logout.html'}, name='logout'),
     url(r'^register/$', views.register, name='register'),
     url(r'^administration/$', views.administration, name='administration'),
+    url(r'^profile_editor/$', views.profile_editor, name='profile_editor'),
 ]
