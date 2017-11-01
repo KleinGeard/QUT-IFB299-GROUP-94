@@ -111,6 +111,7 @@ def profile_editor(request):
         email = request.POST.get('email')
         group = request.POST.get('account_type')
         password = request.POST.get('password')
+
         #update database
         if (group != None):
             auth_group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(group))
@@ -125,7 +126,7 @@ def profile_editor(request):
                             cursor.execute("UPDATE auth_user_groups SET group_id={} WHERE id={};".format(auth_group_id, int(user_group_id[0])))
                             print("updated")
                         else:
-                            cursor.execute(insert_user.format(username, password, first_name, last_name, email))
+                            cursor.execute(insert_user.format(username, first_name, last_name, email))
                             sleep(2.0)
                             relevant_user = User.objects.raw("SELECT * FROM auth_user WHERE username = '{}';".format(username))
                             sleep(0.5)
@@ -133,6 +134,9 @@ def profile_editor(request):
                             sleep(0.5)
                             cursor.execute("INSERT INTO auth_user_groups (group_id, user_id) VALUES ({},{});".format(list(relevant_group_table)[0].id, list(relevant_user)[0].id))
                             print("inserted")
+                            usr = list(relevant_user)[0]
+                            usr.set_password(password)
+                            usr.save()
 
         return HttpResponseRedirect("/administration")
 
