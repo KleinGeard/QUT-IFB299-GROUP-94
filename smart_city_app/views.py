@@ -3,21 +3,16 @@ from django.shortcuts import redirect
 from django.db import connection
 from django.http import HttpResponse, HttpResponseRedirect
 from smart_city_app.models import map_item
-from smart_city_app.queries import map_search, get_10_items, update_map_items, insert_map_item, update_user, insert_user
+from smart_city_app.queries import *
 from django.contrib.auth import login
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.forms import UserCreationForm
-from smart_city_app.functions import get_group_id
+from smart_city_app.functions import *
 from time import sleep
 
 # Welcome/home page view
 def index(request):
-    
-    # u = User.objects.get(username='dev') 
-    # u.set_password('dev') # getting around the password requirements
-    # u.save()
-
     page_title = 'Smart City - Welcome Page'
     group_id = 0
     top_ten = {}
@@ -32,7 +27,7 @@ def index(request):
     if (request.user.is_authenticated()):
         groups = request.user.groups.all()
         if (len(groups) > 0):
-            group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}';".format(groups[0].name))[0].id
+            group_id = Group.objects.raw(get_auth_group_id_by_name.format(groups[0].name))[0].id
             top_ten = map_item.objects.raw(get_10_items.format(group_id))
 
     if (q):
@@ -94,7 +89,7 @@ def profile_editor(request):
     groups = ""
 
     if (int(u_id) > 0):
-        u = User.objects.raw("SELECT * FROM auth_user WHERE id={};".format(u_id))
+        u = get_user_by_id(u_id)
         count = len(list(u))
         u = list(u)[0]
         user = User.objects.get(id = u_id)
@@ -114,26 +109,21 @@ def profile_editor(request):
 
         #update database
         if (group != None):
-            auth_group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(group))
+            auth_group_id = get_group_id_by_name(group)
             if (len(list(auth_group_id))):
                 auth_group_id = list(auth_group_id)[0].id
                 with connection.cursor() as cursor:
                     cursor.execute(update_user.format(first_name, last_name, username, email, u_id))
                     if (group.lower() == "administration" or group.lower() == "students" or group.lower() == "businessmen" or group.lower() == "tourists"):
                         if (len(list(groups))):
-                            cursor.execute("SELECT id FROM auth_user_groups WHERE user_id={}".format(u_id))
+                            cursor.execute(get_group_id_by_user_id.format(u_id))
                             user_group_id = cursor.fetchall()[0]
-                            cursor.execute("UPDATE auth_user_groups SET group_id={} WHERE id={};".format(auth_group_id, int(user_group_id[0])))
-                            print("updated")
+                            cursor.execute(update_user_group_by_user_id.format(auth_group_id, int(user_group_id[0])))
                         else:
                             cursor.execute(insert_user.format(username, first_name, last_name, email))
-                            sleep(2.0)
-                            relevant_user = User.objects.raw("SELECT * FROM auth_user WHERE username = '{}';".format(username))
-                            sleep(0.5)
-                            relevant_group_table = Group.objects.raw("SELECT * FROM auth_group  WHERE name = '{}';".format(group))
-                            sleep(0.5)
-                            cursor.execute("INSERT INTO auth_user_groups (group_id, user_id) VALUES ({},{});".format(list(relevant_group_table)[0].id, list(relevant_user)[0].id))
-                            print("inserted")
+                            relevant_user = User.objects.raw(get_user_by_username.format(username))
+                            relevant_group_table = Group.objects.raw(get_auth_group_by_name.format(group))
+                            cursor.execute(insert_into_auth_user_groups.format(list(relevant_group_table)[0].id, list(relevant_user)[0].id))
                             usr = list(relevant_user)[0]
                             usr.set_password(password)
                             usr.save()
@@ -173,7 +163,7 @@ def editor(request):
         place_id = 0
 
     if (int(place_id) > 0):
-        place = map_item.objects.raw("SELECT * FROM db.get_places WHERE map_item_id={};".format(place_id))
+        place = map_item.objects.raw(get_map_item_by_id.format(place_id))
         count = len(list(place))
         place = list(place)[0]
 
@@ -189,7 +179,7 @@ def editor(request):
         if (int(place_id) > 0):
             auth_group_id = 0
             if (group != None):
-                auth_group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(group))
+                auth_group_id = Group.objects.raw(get_auth_group_id_by_name.format(group))
                 auth_group_id = list(auth_group_id)[0].id
             with connection.cursor() as cursor:
                 cursor.execute(update_map_items.format(name, addr, ind, depart, email, phone, int(auth_group_id), int(place_id)))
@@ -197,7 +187,7 @@ def editor(request):
         else:
             auth_group_id = 0
             if (group != None):
-                auth_group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(group))
+                auth_group_id = Group.objects.raw(get_auth_group_id_by_name.format(group))
                 auth_group_id = list(auth_group_id)[0].id
             with connection.cursor() as cursor:
                 cursor.execute(insert_map_item.format(name, addr, ind, depart, email, int(auth_group_id), phone))
@@ -221,7 +211,7 @@ def editor(request):
 def places(request):
     page_title = 'Smart City - Places'
 
-    results = map_item.objects.raw("SELECT * FROM db.get_places;") # selecting from a view, joining map_items and auth_group
+    results = map_item.objects.raw(get_all_places) # selecting from a view, joining map_items and auth_group
     count = len(list(results))
 
     group_id = get_group_id(request, Group)
@@ -263,7 +253,7 @@ def contact(request):
 def administration(request):
     page_title = 'Smart City - administration'
 
-    results = User.objects.raw("SELECT * FROM auth_user;")
+    results = User.objects.raw(get_all_auth_users)
 
     group_id = get_group_id(request, Group)
     if (group_id == 1):
@@ -334,7 +324,7 @@ def edit_profile(request):
         place_id = 0
 
     if (int(place_id) > 0):
-        place = map_item.objects.raw("SELECT * FROM db.get_places WHERE map_item_id={}".format(place_id))
+        place = map_item.objects.raw(get_map_item_by_id.format(place_id))
         count = len(list(place))
         place = list(place)[0]
 
@@ -354,7 +344,7 @@ def edit_profile(request):
 
         auth_group_id = 0
         if (group != None):
-            auth_group_id = Group.objects.raw("SELECT id FROM auth_group WHERE name='{}'".format(group))
+            auth_group_id = Group.objects.raw(get_auth_group_id_by_name.format(group))
 
             if (len(list(auth_group_id))):
                 auth_group_id = list(auth_group_id)[0].id
@@ -362,12 +352,12 @@ def edit_profile(request):
                     cursor.execute(update_user.format(first_name, last_name, username, email, int(request.user.id)))
                     if (group.lower() == "students" or group.lower() == "businessmen" or group.lower() == "tourists"):
                         if (len(list(groups))):
-                            cursor.execute("SELECT id FROM auth_user_groups WHERE user_id={}".format(request.user.id))
+                            cursor.execute(get_group_id_by_user_id.format(request.user.id))
                             user_group_id = cursor.fetchall()[0]
-                            cursor.execute("UPDATE auth_user_groups SET group_id={} WHERE id={};".format(auth_group_id, int(user_group_id[0])))
+                            cursor.execute(update_user_group_by_user_id.format(auth_group_id, int(user_group_id[0])))
                             print("updated")
                         else:
-                            cursor.execute("INSERT INTO auth_user_groups (group_id, user_id) VALUES ({},{});".format(auth_group_id, request.user.id))
+                            cursor.execute(insert_into_auth_user_groups.format(auth_group_id, request.user.id))
                             print("inserted")
 
         return HttpResponseRedirect("/profile")
@@ -375,7 +365,7 @@ def edit_profile(request):
     group_id = get_group_id(request, Group)
 
     with connection.cursor() as cursor:
-        group_list = cursor.execute("SELECT * FROM auth_group")
+        group_list = cursor.execute(get_auth_groups)
 
     user_group = ""
     groups = request.user.groups.all()
