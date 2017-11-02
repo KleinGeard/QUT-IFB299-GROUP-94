@@ -27,7 +27,7 @@ def index(request):
     if (request.user.is_authenticated()):
         groups = request.user.groups.all()
         if (len(groups) > 0):
-            group_id = Group.objects.raw(get_auth_group_id_by_name.format(groups[0].name))[0].id
+            group_id = get_group_id_by_name(groups[0].name)[0].id
             top_ten = map_item.objects.raw(get_10_items.format(group_id))
 
     if (q):
@@ -179,7 +179,7 @@ def editor(request):
         if (int(place_id) > 0):
             auth_group_id = 0
             if (group != None):
-                auth_group_id = Group.objects.raw(get_auth_group_id_by_name.format(group))
+                auth_group_id = get_group_id_by_name(group)
                 auth_group_id = list(auth_group_id)[0].id
             with connection.cursor() as cursor:
                 cursor.execute(update_map_items.format(name, addr, ind, depart, email, phone, int(auth_group_id), int(place_id)))
@@ -187,7 +187,7 @@ def editor(request):
         else:
             auth_group_id = 0
             if (group != None):
-                auth_group_id = Group.objects.raw(get_auth_group_id_by_name.format(group))
+                auth_group_id = get_group_id_by_name(group)
                 auth_group_id = list(auth_group_id)[0].id
             with connection.cursor() as cursor:
                 cursor.execute(insert_map_item.format(name, addr, ind, depart, email, int(auth_group_id), phone))
@@ -344,7 +344,7 @@ def edit_profile(request):
 
         auth_group_id = 0
         if (group != None):
-            auth_group_id = Group.objects.raw(get_auth_group_id_by_name.format(group))
+            auth_group_id = get_group_id_by_name(group)
 
             if (len(list(auth_group_id))):
                 auth_group_id = list(auth_group_id)[0].id
