@@ -1,6 +1,6 @@
 from django.contrib.auth.models import Group, User
 from smart_city_app.queries import *
-# get the group_id of the user
+
 def get_group_id(request, Group):
     if (request.user.is_authenticated()):
         groups = request.user.groups.all()

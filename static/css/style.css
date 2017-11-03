@@ -8,7 +8,7 @@ h1 {
 
 .hyperlinks {
     text-decoration: none;
-    color: #22aa22;
+    color: #3c13f5;
 }
 
 .tile_small {
@@ -51,7 +51,8 @@ h1 {
 }
 
 .nav-link a.active {
-    background-color: #22aa22;
+    background-color: rgb(95, 216, 95);
+    color: black;
 }
 
 #map_img {
@@ -91,5 +92,5 @@ h1 {
 }
 
 tr:nth-child(even) {
-    background-color: #e5ffd4;
+    background-color: rgb(95, 216, 95);
 }

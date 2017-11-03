@@ -28,7 +28,7 @@
         </ul>
         <content>
             <h2>Administration</h2>
-            <a href="/profile_editor?id=0"><input style="background-color: rgb(36, 255, 36); color: rgb(0, 0, 0); height: 35px; border-style:none; border-radius: 8px; font-family: sans-serif; font-size: 18px;" id="add" value="Create New Account" type="button" name="add"/></a>
+            <a href="/profile_editor?id=0"><input style="background-color: rgb(95, 216, 95); color: rgb(0, 0, 0); height: 35px; border-style:none; border-radius: 8px; font-family: sans-serif; font-size: 18px;" id="add" value="Create New Account" type="button" name="add"/></a>
             <hr>
             <table id="place_list" class="tbl">
                 <!-- Headings -->
@@ -47,8 +47,10 @@
                         <td class="cell">{{result.first_name}}</td>
                         <td class="cell">{{result.last_name}}</td>
                         <td class="cell">{{result.email}}</td>
-                        <td class="cell"><a href="/profile_editor?id={{result.id}}"><input style="background-color: rgb(209, 209, 0); color: rgb(0, 0, 0); height: 35px; border-style:none; border-radius: 8px; font-family: sans-serif; font-size: 18px;" id="edit" value="Edit" type="button" name="edit"/></a></td>
-                        <td class="cell"><input style="background-color: rgb(207, 38, 38); color: rgb(0, 0, 0); height: 35px; border-style:none; border-radius: 8px; font-family: sans-serif; font-size: 18px;" id="delete" value="Delete" type="button" name="delete"/></td>
+                        <td class="cell">
+                            <a href="/profile_editor?id={{result.id}}"><img src="../../../static/edit.png" width="15" height="15" title="Edit" alt="Edit Icon"></a>
+                            <a href="/profile_editor?id={{result.id}}"><img src="../../../static/delete.png" width="15" height="15" title="Delete" alt="Delete Icon"></a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
